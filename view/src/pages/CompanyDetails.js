@@ -65,7 +65,7 @@ const CompanyDetails = () => {
               </Card.Text>
             </Card.Body>
             <ListGroup className="list-group-flush">
-              <ListGroup.Item>Indestry : {company.indusrty}</ListGroup.Item>
+              <ListGroup.Item>industry : {company.industry}</ListGroup.Item>
               <ListGroup.Item>Countey: {company.country}</ListGroup.Item>
               <ListGroup.Item>Email: {company.email}</ListGroup.Item>
               <ListGroup.Item>
