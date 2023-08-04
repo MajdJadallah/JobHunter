@@ -10,6 +10,10 @@ const applicationSchema = mongoose.Schema(
       default: uuidv4,
       unique: true,
     },
+    companyName:{
+      type: String,
+      required: true,
+    },
     firstname: {
       type: String,
       required: true,
@@ -21,7 +25,6 @@ const applicationSchema = mongoose.Schema(
     email: {
       type: String,
       required: true,
-      unique: true,
     },
     major: {
       type: String,
@@ -34,6 +37,7 @@ const applicationSchema = mongoose.Schema(
     status: {
       type: String,
       required: true,
+      default: "pending",
     },
     phonenumber: {
       type: Number,
@@ -75,6 +79,7 @@ const applicationSchema = mongoose.Schema(
 
 // Static method to send an application
 applicationSchema.statics.sendApplication = async function (
+  companyName,
   firstname,
   lastname,
   email,
@@ -90,6 +95,7 @@ applicationSchema.statics.sendApplication = async function (
   cv
 ) {
   const application = await this.create({
+    companyName,
     firstname,
     lastname,
     email,

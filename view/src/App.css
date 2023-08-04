@@ -276,6 +276,7 @@ display: flex;
 .dash-board .side-nav {
 background-color: var(--main-color);
 width: 260px;
+min-height: 725px;
 padding: 0px 10px;
 }
 .dash-board .side-nav ul {

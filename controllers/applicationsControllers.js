@@ -2,6 +2,7 @@ const applicationModel = require("../models/applicationsModels");
 
 const sendApplication = async (req, res) => {
   const {
+    companyName,
     firstname,
     lastname,
     email,
@@ -19,6 +20,7 @@ const sendApplication = async (req, res) => {
 
   try {
     const application = await applicationModel.sendApplication(
+      companyName,
       firstname,
       lastname,
       email,

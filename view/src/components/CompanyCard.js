@@ -9,7 +9,7 @@ const CompanyCard = ({company,index}) => {
   return (
     <div className="me-4 mt-4">
       <Card style={{ width: "20rem" }}>
-        <Card.Img variant="top" src={company.logo} style={{height: "200px"}} />
+        <Card.Img variant="top" src={company.logo} style={{height: "250px"}} />
         <Card.Body>
           <Card.Title>{company.name}</Card.Title>
           <Card.Text>

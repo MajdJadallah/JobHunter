@@ -33,15 +33,13 @@ const CompanyDetails = () => {
     axios
       .get(`http://localhost:8080/jobs/getjobs`)
       .then((response) => {
-        // const jobsArray = response.data;
-        // console.log("jobsArray",jobsArray)
-        // console.log("filtered", jobsArray.map(job => job.companyName === company.companyName))
         setJobs(response.data.filter((job) => job.companyName === name));
       })
       .catch((error) => {
         console.error("AxiosError:", error);
       });
   }, []);
+  
   console.log(jobs);
   return (
     <div>

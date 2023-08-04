@@ -37,34 +37,16 @@ function JobSearch() {
     Teaching: false,
   });
 
-  // useEffect(() => {
-  //   fetch("http://localhost:5000/jobs")
-  //     .then((res) => {
-  //       if (!res.ok) {
-  //         throw Error("Could not fetch the data for that resource");
-  //       }
-  //       return res.json();
-  //     })
-  //     .then((data) => {
-  //       setJobs(data);
-  //       setIsPending(false);
-  //       setError(null);
-  //     })
-  //     .catch((err) => {
-  //       setIsPending(false);
-  //       setError(err.message);
-  //     });
-  // }, []);
   useEffect(() => {
     // Fetch data from the API endpoint in your backend
     axios
-      .get('http://localhost:8080/jobs/getjobs')
+      .get("http://localhost:8080/jobs/getjobs")
       .then((response) => {
         setJobs(response.data);
-        console.log(response.data)
+        console.log(response.data);
       })
       .catch((error) => {
-        console.log('Error fetching data:', error);
+        console.log("Error fetching data:", error);
       });
   }, []);
   useEffect(() => {
@@ -72,27 +54,10 @@ function JobSearch() {
     setFilteredList(fetchResult);
   }, [jobs]);
 
-  // function inputFunction(e) {
-  //   setInputValue(e.target.value);
-  //   let searchResult = jobs.filter((job) =>
-  //     job.title.toLowerCase().includes(inputValue.toLowerCase())
-  //   );
-  //   setFilteredList(searchResult);
-  // }
-  
-  // function compareStrings(str1, str2) {
-  //   for(let i = 0 ; i < str2.length; ++i){
-  //      str1.charAt(i) === str2.charAt(i)
-  //     }
-   
-  //   return str1;
-  //   console.log(str1)
-  // }
-
   function inputFunction(e) {
     setInputValue(e.target.value);
     let searchResult = jobs.filter((job) =>
-    job.title.toLowerCase().startsWith(inputValue.toLowerCase())
+      job.title.toLowerCase().startsWith(inputValue.toLowerCase())
     );
     setFilteredList(searchResult);
   }
@@ -165,17 +130,17 @@ function JobSearch() {
     }
 
     setFilteredList(concatenatedArray);
-    console.log(concatenatedArray)
+    console.log(concatenatedArray);
   };
 
   if (filteredList != undefined) {
-    slicedArr = filteredList.slice(0,6 );
+    slicedArr = filteredList.slice(0, 6);
   }
 
   return (
     <>
       <div className="col-3 p-0">
-        <div style={{fontFamily: "'Roboto Slab', serif" }}>
+        <div style={{ fontFamily: "'Roboto Slab', serif" }}>
           <h6>Type of Employment</h6>
           <div className="form-check">
             <label className="form-check-label" htmlFor="Fulltime">
