@@ -1,0 +1,70 @@
+/* Set body margin and padding to 0 to remove default spacing */
+body {
+    margin: 0;
+    padding: 0;
+    font-family: Arial, sans-serif;
+  }
+  
+  /* Set HTML and body height to 100% to make the form fill the whole page */
+  html, body {
+    height: 100%;
+  }
+  
+  /* Set the form container to fill the whole page with margin and padding */
+  .form-group {
+    width: 80%;
+    height: 80%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    padding: 20px;
+    /* background-color: #f2f2f2; */
+  }
+  
+  /* Styling for the form itself */
+  .form {
+    /* margin: 80px; */
+    max-width: 400px;
+    padding: 20px;
+    background-color: #ffffff;
+    border-radius: 10px;
+    box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+    -webkit-border-radius: 10px;
+    -moz-border-radius: 10px;
+    -ms-border-radius: 10px;
+    -o-border-radius: 10px;
+}
+  
+  /* CSS for the form labels */
+  .form-group label {
+    display: block;
+    margin-bottom: 5px;
+    font-weight: bold;
+  }
+  
+  /* CSS for the form inputs */
+  .form-group input[type="text"],
+  .form-group input[type="url"],
+  .form-group textarea {
+    width: 100%;
+    padding: 10px;
+    border: 1px solid #ccc;
+    border-radius: 5px;
+    margin-bottom: 10px;
+  }
+  
+  /* CSS for the form submit button */
+  .form-group .submit-btn {
+    padding: 10px 20px;
+    background-color: #007bff;
+    color: #fff;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+  }
+  
+  /* CSS for the form submit button on hover */
+  .form-group .submit-btn:hover {
+    background-color: #0056b3;
+  }
+  
