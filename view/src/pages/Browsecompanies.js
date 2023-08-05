@@ -135,7 +135,7 @@ const Browsecompanies = () => {
                     >
                       <Card.Img
                         variant="top"
-                        src={logoCompany}
+                        src={company.logo}
                         style={{ width: "150px" }}
                       />
 
