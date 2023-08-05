@@ -1,8 +1,8 @@
 import React from "react";
 import "./SignUpCompany.css";
 import axios from "axios";
-import '../App.css';
-import Header from '../components/SignHeader';
+import "../App.css";
+import Header from "../components/SignHeader";
 import { useSignUpContext } from "./context";
 
 const SignUpUser = () => {
@@ -23,7 +23,7 @@ const SignUpUser = () => {
   const [Grade, setGrade] = React.useState("");
   const [Graduation, setGraduation] = React.useState("");
   const [skills, setSkills] = React.useState("");
-  
+
   const handleChange = (event) => {
     const { name, value } = event.target;
     // Use the individual state setters to update the state for each input field
@@ -72,7 +72,7 @@ const SignUpUser = () => {
     }
   };
 
-  const handleSubmit = async(e) => {
+  const handleSubmit = async (e) => {
     e.preventDefault();
     const formData = {
       name,
@@ -94,7 +94,10 @@ const SignUpUser = () => {
 
     try {
       // Perform your API call here
-      const response = await axios.post("http://localhost:8080/users/signup", formData);
+      const response = await axios.post(
+        "http://localhost:8080/users/signup",
+        formData
+      );
       console.log("API Response:", response.data);
       // Optionally, you can handle the API response here
     } catch (error) {
