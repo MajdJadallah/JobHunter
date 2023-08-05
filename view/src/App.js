@@ -25,6 +25,8 @@ function App() {
       <Route exact path='/' element={<Home />}/>
       <Route path='/findjob' element={<Findjob />}/>
       <Route path='/applied/:jobid/:companyid/:jobLevel/:typeofEmployment/:title/:name' element={<Applied/>}/>
+      {/* <Route path="/applied/:name" element={<Applied/>} /> */}
+
       <Route path='/findjob/:category' element={<Findjob />}/>
       <Route path='/updateprofile' element={<UpdateProfile />}/>
       <Route path='/jobdetails/:id' element={<JobDetails />}/>
