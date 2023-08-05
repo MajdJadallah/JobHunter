@@ -83,7 +83,7 @@
 //                                 </a>
 //                             </div>
 //                             <div className="text-center text-lg-start mt-4 pt-2">
-//                                 <Link to="/" 
+//                                 <Link to="/"
 //                                     type="submit"
 //                                     className="login-btn"
 //                                 >
@@ -109,8 +109,8 @@
 import React, { useState } from "react";
 import { Link, useNavigate } from "react-router-dom";
 import axios from "axios";
-import signin from '../images/rag doll.png'
-import Header from '../components/SignHeader'
+import signin from "../images/rag doll.png";
+import Header from "../components/SignHeader";
 import Cookies from "universal-cookie";
 
 const Login = () => {
