@@ -7,6 +7,8 @@ function TestSearch() {
   const [search, setSearch] = useState('');
   const { category: urlCategory } = useParams ();
   const [selectedCategories, setSelectedCategories] = useState([]);
+  const { category } = useParams();
+  let [filteredCategories, setFilteredCategories] = useState([]);
 
   useEffect(() => {
     axios
@@ -18,6 +20,11 @@ function TestSearch() {
         console.log(err);
       });
   }, []);
+
+  useEffect(() => {
+    let fetchResult = jobs.filter((job) => job.category === category);
+    setFilteredCategories(fetchResult);
+  }, [jobs]);
 
   const handleSearch = (e) => {
     setSearch(e.target.value);
@@ -88,7 +95,8 @@ function TestSearch() {
           id="inputField"
         />
       </div>
-        {filteredList.length > 0 ? (
+
+        {/* {filteredList.length > 0 ? (
             filteredList.map((job) => (
               <Col key={job.id} md={6} className="h-100">
                 <Card id="card">
@@ -105,7 +113,45 @@ function TestSearch() {
             ))
           ) : (
             <p>No jobs found.</p>
-          )}
+          )} */}
+            {/* ... Rest of the JSX ... */}
+
+      {filteredCategories.length > 0 ? (
+        <>
+          {filteredCategories.map((job) => (
+            <Col key={job.id} md={6} className="h-100">
+              <Card id="card">
+                <Card.Body>
+                  <Card.Title id="title-job">{job.title}</Card.Title>
+                  <Card.Text>{job.desc}</Card.Text>
+                  <Link to={`/jobdetails/${job.id}`} id="more">
+                    Details
+                  </Link>
+                </Card.Body>
+              </Card>
+              <br />
+            </Col>
+          ))}
+        </>
+      ) : (
+        <>
+          {filteredList.map((job) => (
+            <Col key={job.id} md={6} className="h-100">
+              <Card id="card">
+                <Card.Body>
+                  <Card.Title id="title-job">{job.title}</Card.Title>
+                  <Card.Text>{job.desc}</Card.Text>
+                  <Link to={`/jobdetails/${job.id}`} id="more">
+                    Details
+                  </Link>
+                </Card.Body>
+              </Card>
+              <br />
+            </Col>
+          ))}
+        </>
+      )}
+
         </Row>
         </Col>
         </Row>

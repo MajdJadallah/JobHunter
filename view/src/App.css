@@ -1396,6 +1396,10 @@ body {
 .footerlist li {
   color: #fff;
 }
+.footer_link_categories{
+  color: white;
+  text-decoration: none;
+}
 #follow {
   color: #fff;
 }
