@@ -1,15 +1,13 @@
 import React from "react";
 import Card from "react-bootstrap/Card";
-import ListGroup from "react-bootstrap/ListGroup";
-import Col from "react-bootstrap/Col";
-import { Link, useParams } from "react-router-dom";
+import { Link} from "react-router-dom";
 
 const CompanyCard = ({company,index}) => {
   console.log(company._id)
   return (
     <div className="me-4 mt-4">
       <Card style={{ width: "20rem" ,height:"30rem" , justifyContent:"center" ,alignItems:"center", padding:".5rem 1rem 0",textAlign:"start",boxShadow: "rgba(99, 99, 99, 0.2) 0px 2px 8px 0px !important"}}>
-        <Card.Img variant="top" src={company.logo} style={{width: "150px"}} />
+        <Card.Img variant="top" src={company.name} style={{width: "150px"}} />
         <Card.Body>
           <Card.Title style={{fontFamily:"'Roboto Slab', serif"}}>{company.name}</Card.Title>
           <Card.Text>{company.name }is a specialicit company in {company.industry} located on {company.country}
@@ -28,7 +26,7 @@ const CompanyCard = ({company,index}) => {
         <Card.Body>
         <Link to={`/companydetails/${company._id}`} id="more">
                     Details
-                  </Link>
+        </Link>
         </Card.Body>
       </Card>
     </div>

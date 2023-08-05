@@ -1,9 +1,10 @@
 const companyModel = require("../models/companiesModels");
 const mongoose = require('mongoose');
-const jwt = require('jsonwebtoken')
+const jwt = require('jsonwebtoken');
 
 const generateToken = (company) => {
-  const token = jwt.sign({ companyId: company._id }, 'you', { expiresIn: '1h' });
+  var companyId= company._id;
+  const token = jwt.sign({ companyId: company._id }, 'you', { expiresIn: '2h' });
   return token;
 };
 
@@ -20,7 +21,7 @@ const signinCompany = async (req, res) => {
     // Set the token as a cookie
     res.cookie('access_token', token, { httpOnly: true, maxAge: 3600000 }); // Expires in 1 hour
 
-    res.status(200).json({ email });
+    res.status(200).json({ companyId:companyId,email  });
   } catch (error) {
     res.status(400).json({ error: error.message });
   }
@@ -100,3 +101,4 @@ module.exports = {
   getAllCompanies,
   getCompany,
 };
+

@@ -18,7 +18,7 @@ const userSchema = new Schema({
     username:{//by default firstname concat lastname
         type: String,
         required: true,
-        unique: true,
+        // unique: true,
     },
     phone:{
         type: String,

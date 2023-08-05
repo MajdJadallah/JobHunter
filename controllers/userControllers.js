@@ -1,18 +1,48 @@
+const jwt = require('jsonwebtoken');
 const User = require("../models/usersModels");
 
-// signin route
+const JWT_SECRET = 'your-secret-key'; // Replace 'your-secret-key' with your actual secret key
+
+const authenticateUser = (req, res, next) => {
+  const token = req.cookies.access_token;
+
+  if (!token) {
+    return res.status(401).json({ error: 'Unauthorized' });
+  }
+
+  jwt.verify(token, JWT_SECRET, (err, user) => {
+    if (err) {
+      return res.status(403).json({ error: 'Invalid token' });
+    }
+    req.user = user;
+    next();
+  });
+};
+
+const generateToken = (user) => {
+  const userId = user._id;
+  const token = jwt.sign({ userId: user._id }, JWT_SECRET, { expiresIn: '2h' });
+  return token;
+};
+
 const signinUser = async (req, res) => {
   const { email, password } = req.body;
 
   try {
     const user = await User.signin(email, password);
-    res.status(200).json({ email });
+
+    // Generate JWT token
+    const token = generateToken(user);
+
+    // Set the token as a cookie
+    res.cookie('access_token', token, { httpOnly: true, maxAge: 3600000 }); // Expires in 1 hour
+
+    res.status(200).json({ userId: user._id, email });
   } catch (error) {
     res.status(400).json({ error: error.message });
   }
 };
 
-//signup route
 const signupUser = async (req, res) => {
   const {
     firstname,
@@ -48,7 +78,14 @@ const signupUser = async (req, res) => {
       email,
       password
     );
-    res.status(200).json({ email });
+
+    // Generate JWT token
+    const token = generateToken(user);
+
+    // Set the token as a cookie
+    res.cookie('access_token', token, { httpOnly: true, maxAge: 3600000 }); // Expires in 1 hour
+
+    res.status(200).json({ email, userID: user._id });
   } catch (error) {
     res.status(400).json({ error: error.message });
   }
@@ -80,6 +117,7 @@ const editProfile = async (req, res) => {
 };
 
 module.exports = {
+  authenticateUser,
   signinUser,
   signupUser,
   getAllUsers,
