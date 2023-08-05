@@ -82,6 +82,17 @@ const SignUpCompany = () => {
         console.error(error);
       }
   }
+  const handleChangeImage = (event) => {
+    const selectedFile = event.target.files[0];
+    if (selectedFile) {
+      const reader = new FileReader();
+      reader.onloadend = () => {
+        const imageUrl = reader.result;
+        console.log('Image URL:', imageUrl);
+      };
+      reader.readAsDataURL(selectedFile);
+    }
+  };
   return (
   <>
   <Header/>
@@ -103,14 +114,30 @@ const SignUpCompany = () => {
     </div>
     <div className="input">
       <label htmlFor="industry">Industry:</label>
-      <input
+      <select
+        type="text"
+        className=" input-field"
+        id="industry"
+        name="industry"
+        value={industry}
+        onChange={handleChange}>
+        <option>technology</option>
+        <option>engineering</option>
+        <option>business</option>
+        <option>marketing</option>
+        <option>sales</option>
+        <option>medical</option>
+        <option>teaching</option>
+        <option>accounting</option>
+      </select>
+      {/* <input
         type="text"
          className=" input-field"
         id="industry"
         name="industry"
         value={industry}
         onChange={handleChange}
-      />
+      /> */}
     </div>
     <div className="input">
       <label htmlFor="country">Country:</label>
@@ -123,8 +150,7 @@ const SignUpCompany = () => {
         onChange={handleChange}
       />
     </div>
-    
-    <div className="input">
+    {/* <div className="input">
       <label htmlFor="type">Type:</label>
       <input
         type="text"
@@ -134,7 +160,7 @@ const SignUpCompany = () => {
         value={type}
         onChange={handleChange}
       />
-    </div>
+    </div> */}
     <div className="input">
       <label htmlFor="desc">Description:</label>
       <textarea
@@ -149,18 +175,18 @@ const SignUpCompany = () => {
     <div className="input">
       <label htmlFor="logo">Logo:</label>
       <input
-        type="text"
+        type="file"
          className=" input-field"
         id="logo"
         name="logo"
         value={logo}
-        onChange={handleChange}
+        onChange={handleChangeImage}
       />
     </div>
     </div>
     <h3>Contact Information</h3>
     <div className="contactInformation card-div">
-    <div className="input">
+    {/* <div className="input">
       <label htmlFor="email">email:</label>
       <input
         type="email"
@@ -170,7 +196,7 @@ const SignUpCompany = () => {
         value={email}
         onChange={handleChange}
       />
-    </div>
+    </div> */}
     <div className="input">
       <label htmlFor="contactLinkedin">LinkedIn:</label>
       <input

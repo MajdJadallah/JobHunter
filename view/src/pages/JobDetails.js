@@ -11,7 +11,7 @@ const JobDetails = () => {
   const [error, setError] = useState(null);
 
   useEffect(() => {
-    fetch(`http://localhost:5000/jobs/${id}`)
+    fetch(`http://localhost:8080/jobs/${id}`)
       .then((res) => {
         if (!res.ok) {
           throw Error('Could not fetch the data for that resource');
@@ -25,7 +25,7 @@ const JobDetails = () => {
 
         const companyId = data.companyId;
         if (companyId) {
-          fetch(`http://localhost:5000/company/${companyId}`)
+          fetch(`http://localhost:8080/company/${companyId}`)
             .then((res) => {
               if (!res.ok) {
                 throw Error('Could not fetch the data for the company');

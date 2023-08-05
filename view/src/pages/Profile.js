@@ -93,6 +93,17 @@ export default function EditButton() {
     console.log("Form data:", formData);
     handleCloseModal();
   };
+  const handleChangeImage = (event) => {
+    const selectedFile = event.target.files[0];
+    if (selectedFile) {
+      const reader = new FileReader();
+      reader.onloadend = () => {
+        const imageUrl = reader.result;
+        console.log('Image URL:', imageUrl);
+      };
+      reader.readAsDataURL(selectedFile);
+    }
+  };
   return (
     <div>
       <Header />
@@ -293,6 +304,15 @@ export default function EditButton() {
               name="summary"
               value={formData.summary}
               onChange={handleChange}
+            />
+            <label className="labelEdit">
+            Picture:
+          </label>
+          <input
+              type="file"
+              name="avatar"
+              value={formData.summary}
+              onChange={handleChangeImage}
             />
           <button type="button" onClick={handleCloseModal} style={closeBtn}>Close</button>
           <button type="submit" style={saveBtn}>Save Changes</button>

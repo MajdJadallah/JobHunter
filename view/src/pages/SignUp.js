@@ -78,6 +78,10 @@ return (
       <br />
       <br />
     </div>
+    <div className="text-center text-lg-start mt-4 pt-2" id="next">
+    { !isCompany? <Link to = '/signup/jobseeker/profileuser' type="submit" >Sign Up</Link>:<Link to = '/signup/company' type="submit">Sign Up</Link>}
+    </div>
+    <div id="afterNext">
     <div className="d-flex justify-content-between align-items-center">
       <div className="form-check mb-0">
         <input
@@ -90,13 +94,6 @@ return (
       </div>
       
     </div>
-    <div className="text-center text-lg-start mt-4 pt-2" id="next">
-    { !isCompany? <Link to = '/signup/jobseeker' type="submit" >Sign Up</Link>:<Link to = '/signup/company' type="submit">next</Link>}
-    </div>
-    <div id="afterNext">
-      <a href="#!" className="text-body">
-        Forgot password?
-      </a>
       <Link to ='/signin' className="text-body">Sign In</Link>
       </div>
   </form>

@@ -87,7 +87,17 @@ const ProfileUser = () => {
         break;
     }
   };
-
+  const handleChangeImage = (event) => {
+    const selectedFile = event.target.files[0];
+    if (selectedFile) {
+      const reader = new FileReader();
+      reader.onloadend = () => {
+        const imageUrl = reader.result;
+        console.log('Image URL:', imageUrl);
+      };
+      reader.readAsDataURL(selectedFile);
+    }
+  };
   const handleSubmit = async(e) => {
     e.preventDefault();
     const response = await axios.post("http://localhost:8080/users/signup", {
@@ -125,7 +135,7 @@ const ProfileUser = () => {
     <div id="welcomeProfile">
     "Hey Rockstar! 🤘 Welcome to your job-seeking playground! Showcase your skills, flaunt your experience, and let's groove our way to landing the coolest gigs in town! 🎉🚀"
     </div>
-    <form onSubmit={handleSubmit}>
+    <form onSubmit={handleSubmit} id="userData-Form">
     <h3>Personal Information</h3>
       <div className='personalInfo card-div'>
       <div class='input'>
@@ -148,13 +158,23 @@ const ProfileUser = () => {
           onChange={handleChange}
         />
       </div>
-      <div class='input'>
+      {/* <div class='input'>
         <label htmlFor="email">Email:</label>
         <input
           type="email"
           className="input-field"
           id="email"
           name="email"
+          onChange={handleChange}
+        />
+      </div> */}
+      <div class='input'>
+        <label htmlFor="location">Username:</label>
+        <input
+          type="text"
+          className="input-field"
+          id="username"
+          name="username"
           onChange={handleChange}
         />
       </div>
@@ -179,28 +199,18 @@ const ProfileUser = () => {
           onChange={handleChange}
         />
       </div>
-      <div class='input'>
-        <label htmlFor="location">Username:</label>
-        <input
-          type="text"
-          className="input-field"
-          id="username"
-          name="username"
-          onChange={handleChange}
-        />
-      </div>
       <div class='input   '>
         <label htmlFor="avatar">Picture:</label>
         <input
-          type="text"
+          type="file"
           className="input-field"
           id="avatar"
           name="avatar"
           value={avatar}
-          onChange={handleChange}
+          onChange={handleChangeImage}
         />
       </div>
-      <div class='input   '>
+      {/* <div class='input   '>
         <label htmlFor="password">Password:</label>
         <input
           type="password"
@@ -209,7 +219,7 @@ const ProfileUser = () => {
           name="password"
           onChange={handleChange}
         />
-      </div>
+      </div> */}
       </div>
         <h3>Education Information</h3>
       <div className='educationInfo card-div'>
@@ -234,16 +244,6 @@ const ProfileUser = () => {
           />
         </div>
    
-        <div class='input'>
-        <label htmlFor="summary">Summary:</label>
-        <input
-          type="text"
-          className="input-field"
-          id="summary"
-          name="summary"
-          onChange={handleChange}
-        />
-      </div>
       <div class='input'>
           <label htmlFor="Graduation">Speciality:</label>
           <input
@@ -254,8 +254,19 @@ const ProfileUser = () => {
             onChange={handleChange}
           />
         </div>
+        <div class='input'>
+        <label htmlFor="summary">Summary:</label>
+        <input
+          type="text"
+          className="input-field"
+          id="summary"
+          name="summary"
+          onChange={handleChange}
+        />
+      </div>
       </div>
         <h3>Experience Information</h3>
+        <div className="experienceInfo card-div">
         <div class='input'>
           <label htmlFor="skills">Skills:</label>
           <input
@@ -289,6 +300,7 @@ const ProfileUser = () => {
             
             onChange={handleChange}
           />
+        </div>
         </div>
         <button type="submit" id="submit">
           Submit

@@ -51,6 +51,16 @@ function handleemail(e) {
                                     value={email}
                                     className="form-control form-control-lg"
                                     placeholder="Enter Email"
+                                    style={{
+                                        backgroundColor: "#fff",
+                                        border: "0.5px solid #3e3e3e",
+                                        width: "100%",
+                                        padding: "0.5rem 1rem",
+                                        fontSize:" 1rem",
+                                        fontWeight: "400",
+                                        lineHeight: "1.5",
+                                        borderRadius: "5px",
+                                        }}
                                 />
                             </div>
                             <div className="form-outline mb-3">
@@ -64,6 +74,16 @@ function handleemail(e) {
                                     value={password}
                                     className="form-control form-control-lg"
                                     placeholder="Enter password"
+                                    style={{
+                                        backgroundColor: "#fff",
+                                        border: "0.5px solid #3e3e3e",
+                                        width: "100%",
+                                        padding: "0.5rem 1rem",
+                                        fontSize:" 1rem",
+                                        fontWeight: "400",
+                                        lineHeight: "1.5",
+                                        borderRadius: "5px",
+                                        }}
                                 />
                             </div>
                             <div className="d-flex justify-content-between align-items-center">

@@ -88,13 +88,11 @@ function JobSearch() {
     e.target.checked
       ? (joblevelValue[`${e.target.value}`] = true)
       : (joblevelValue[`${e.target.value}`] = false);
-
     //filters section
     //typeOfEmployment filter section
     let truetypeOfEmployment = Object.keys(typeOfEmploymentValue).filter(
       (prop) => typeOfEmploymentValue[prop] === true
     );
-
     if (truetypeOfEmployment) {
       typeOfEmploymentResult = truetypeOfEmployment.map((prop) =>
         jobs.filter((job) => job.typeOfEmployment === prop)
@@ -102,21 +100,17 @@ function JobSearch() {
       concatenatedArray = [].concat(...typeOfEmploymentResult);
       // filteredList = concatenatedArray;
     }
-
     // Category filter section
     let trueCategories = Object.keys(categoryValue).filter(
       (prop) => categoryValue[prop] === true
     );
-
     if (trueCategories) {
       categoryResult = trueCategories.map((prop) =>
         jobs.filter((job) => job.category === prop)
       );
-
       concatenatedArray = [].concat(...categoryResult);
       // filteredList = concatenatedArray;
     }
-
     // Job level filter section
     let truejoblevel = Object.keys(joblevelValue).filter(
       (prop) => joblevelValue[prop] === true
@@ -133,7 +127,7 @@ function JobSearch() {
     console.log(concatenatedArray);
   };
 
-  if (filteredList != undefined) {
+  if (filteredList !== undefined) {
     slicedArr = filteredList.slice(0, 6);
   }
 
@@ -324,9 +318,6 @@ function JobSearch() {
                 <Card.Body>
                   <Card.Title id="title-job">{job.title}</Card.Title>
                   <Card.Text>{job.desc}</Card.Text>
-                  {/* <Card.Text>{job.typeOfEmployment}</Card.Text>
-                  <Card.Text>{job.jobLevel}</Card.Text>
-                  <Card.Text>{job.category}</Card.Text> */}
                   <Link to={`/jobdetails/${job.id}`} id="more">
                     Details
                   </Link>
