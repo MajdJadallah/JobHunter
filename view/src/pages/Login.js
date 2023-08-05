@@ -25,10 +25,10 @@ const Login = () => {
         email,
         password,
       });
-      const userinfo = response.data;
+      const userinfo = response.data.userId;
       localStorage.clear();
       sessionStorage.clear();
-      if (userinfo.email.length > 1) {
+      if (userinfo.length > 1) {
         localStorage.setItem("userData", JSON.stringify(userinfo));
         sessionStorage.setItem("userActive", true);
 
