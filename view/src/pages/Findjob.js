@@ -6,6 +6,9 @@ import jobSeeker from '../images/find job.png'
 import Footer from '../components/Footer';
 
 const Findjob = () => {
+  const handleScroll=()=>{
+    window.scrollTo(0,610)
+  }
   return (
     <div className='find-job'>
       <Header active='find'/>
@@ -13,7 +16,7 @@ const Findjob = () => {
       <div id='text'>
       <h1 id='h1'>Find Your Dream Job</h1>
       <p id='p'>Find your next career at companies like Discorde ,Drobbox and Amazon.</p>
-      <button id='lets-start'>Lets start</button>
+      <button id='lets-start' onClick={handleScroll}>Lets start</button>
       </div>
       <img src={jobSeeker} alt='job seeker' id='jobSeeker'/>
       </div>

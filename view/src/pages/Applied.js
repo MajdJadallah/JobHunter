@@ -18,6 +18,8 @@ function Applied() {
   const [joblevel, setJobLevel] = useState("");
   const [major, setMajor] = useState("");
   const [apply, setApply] = useState({});
+  const [companyName, setCompanyName] = useState("");
+
   const navigate = useNavigate();
   const [currentDate, setCurrentDate] = useState("");
   const { companyid, typeOfEmployment, title, name } = useParams();
@@ -34,29 +36,34 @@ function Applied() {
 //--------------------Post data of apply job--------------------------
   const handleSubmit = (e) => {
     e.preventDefault();
+    
     axios
       .post("http://localhost:8080/applications/apply", {
         firstname,
         lastname,
-        email,
-        major: title,
         birthday,
+        location,
+        email,
         phonenumber,
         jobRole,
         joblevel,
         experience,
-        location,
         qualification,
         cv,
+        major,
+        companyName:name,
       })
       .then((response) => {
         console.log(response.data);
-        setApply(response.data);
+        setApply(response.data);    
+          navigate('/findjob');
+
       })
       .catch((error) => {
         console.log(`Error fetching data apply: ${error}`);
         console.log("Error response:", error.response);
       });
+
   };
 
   return (
@@ -125,7 +132,7 @@ function Applied() {
             </div>
             <div className="col-md-6 input-box">
               <label>Job Title</label>
-              <input type="text" required value={title} disabled />
+              <input type="text"required value={title} disabled />
             </div>
             <div className="col-md-6 input-box">
               <label>Job Role</label>
@@ -145,7 +152,7 @@ function Applied() {
             </div>
             <div className="col-md-6 input-box">
               <label>Major</label>
-              <input type="text" required />
+              <input type="text" required  onChange={(e) => setMajor(e.target.value)}/>
             </div>
             <div className="col-md-6 input-box">
               <label>Experience</label>
@@ -176,9 +183,10 @@ function Applied() {
               />
             </div>
           </div>
-          <Link to ='/findjob' type="submit" id="submitApplication" style={{textDecoration:"none",textAlign:"center"}}>
+          <button style={{textDecoration:"none",textAlign:"center"}}id="submitApplication" >submit</button>
+          {/* <Link to ='/findjob' type="submit" id="submitApplication" style={{textDecoration:"none",textAlign:"center"}}>
               Submit
-            </Link>
+            </Link> */}
         </form>
       </div>
 
