@@ -1,17 +1,18 @@
 import { useEffect, useState } from "react";
 import axios from "axios";
+import { Col, Row, Card } from "react-bootstrap";
+import { Link } from "react-router-dom";
+import "../App.css";
 
 const PostJob = () => {
   const [jobs, setJobs] = useState([]);
+  const [allJobs, setAllJobs] = useState([]);
   useEffect(() => {
     axios
       .get("http://localhost:8080/jobs/getjobs")
       .then((response) => {
-        setJobs(
-          response.data.filter(
-            (job) => job.companyName === "Global School"
-          )
-        );
+        setJobs(response.data.filter((job) => job.companyName === "discord"));
+        setAllJobs(response.data);
         console.log("response.data", response.data);
       })
       .catch((error) => {
@@ -19,6 +20,103 @@ const PostJob = () => {
         console.error("AxiosError:", error);
       });
   }, []);
+
+  const handleChange = (event) => {
+    const { name, value } = event.target;
+    // Use the individual state setters to update the state for each input field
+    // switch (name) {
+    //   case "name":
+    //     setName(event.target.value);
+    //     break;
+    //   case "firstname":
+    //     setfirstname(event.target.value);
+    //     break;
+    //   case "lastname":
+    //     setlastname(event.target.value);
+    //     break;
+    //   case "username":
+    //     setusername(event.target.value);
+    //     break;
+    //   case "password":
+    //     setPassword(event.target.value);
+    //     break;
+    //   case "email":
+    //     setEmail(event.target.value);
+    //     break;
+    //   case "avatar":
+    //     setAvatar(event.target.value);
+    //     break;
+    //   case "birthday":
+    //     setBirthday(event.target.value);
+    //     break;
+    //   case "phone":
+    //     setphone(event.target.value);
+    //     break;
+
+    //   case "jobrole":
+    //     setjobrole(event.target.value);
+    //     break;
+
+    //   case "university":
+    //     setUniversity(event.target.value);
+    //     break;
+    //   case "Graduation":
+    //     setGraduation(event.target.value);
+    //     break;
+
+    //   case "speciality":
+    //     setspeciality(event.target.value);
+    //     break;
+    //   case "yearofgraduation":
+    //     setyearofgraduation(event.target.value);
+    //     break;
+    //   case "summary":
+    //     setSummary(event.target.value);
+    //     break;
+    //   case "skills":
+    //     setSkills(event.target.value);
+    //     break;
+    //   case "qualification":
+    //     setQualification(event.target.value);
+    //     break;
+    //   default:
+    //     break;
+    // }
+  };
+
+  const handleSubmit = async (e) => {
+    e.preventDefault();
+    const response = await axios
+      //companyName by default
+      .post("http://localhost:8080/users/signup", {
+        // firstname,
+        // lastname,
+        // username,
+        // phone,
+        // birthday,
+        // skills,
+        // summary,
+        // jobrole,
+        // yearofgraduation,
+        // univarsity,
+        // speciality,
+        // avatar,
+        // email,
+        // password,
+        // id:id
+      })
+      .then((response) => {
+        console.log(response.data);
+      })
+      .catch((error) => {
+        console.log(`Error fetching personal info: ${error}`);
+
+        console.log("Error response:", error.response);
+      }); // Handle form submission here, if needed
+    // You can access the form data using the state variables
+    // Example:
+    console.log(response);
+  };
   console.log("jobs", jobs);
   return (
     <>
@@ -30,76 +128,95 @@ const PostJob = () => {
           <span className="input-group-text border-0" id="search-addon"></span>
         </div>
       </nav>
-      <div className="container p-5">
-        <table className="table align-middle bg-light text-dark">
-          <thead className="bg-light">
-            <tr>
-              <th>Name</th>
-              <th>Major</th>
-              <th>Hiring Status</th>
-              <th>Application Date</th>
-              <th>Position</th>
-              <th>Actions</th>
-            </tr>
-          </thead>
-          <tbody>
-            {jobs.map((job) => (
-              <tr key={job.id}>
-                <td>
-                  <div className="d-flex align-items-center">
-                    <img
-                      src="https://mdbootstrap.com/img/new/avatars/8.jpg"
-                      alt=""
-                      className="rounded-circle img-user-table"
+      <Row className="p-5">
+        <Col className="jobs">
+          <h1 className="text-center">All Jobs</h1>
+          {allJobs.map((job) => (
+            <Card className="mb-3">
+              <Card.Body>
+                <Card.Title id="title-job">{job.title}</Card.Title>
+                <Card.Text>{job.desc}</Card.Text>
+                <Link to={`/jobdetails/${job.id}`} id="more">
+                  Details
+                </Link>
+              </Card.Body>
+            </Card>
+          ))}
+        </Col>
+        <Col className="postjob">
+          <h1 className="text-center">Post New Job</h1>
+          <div id="postJob">
+            <div id="">
+              <form onSubmit={handleSubmit} id="userData-Form">
+                <div className="personalInfo card-div">
+                  <div class="input">
+                    <label htmlFor="title">Job Title:</label>
+                    <input
+                      type="text"
+                      className="input-field"
+                      id="first_name"
+                      name="firstname"
+                      onChange={handleChange}
                     />
-                    <div className="ms-3">
-                      <p className="fw-bold mb-1">
-                        {job.firstname} {job.lastname}
-                      </p>
-                      <p className="text-muted mb-0">{job.email}</p>
-                    </div>
                   </div>
-                </td>
-                <td>
-                  <p className="fw-normal mb-1">{job.major}</p>
-                </td>
-
-                <td>
-                  {(() => {
-                    let badgeClass = "badge  text-light rounded-pill d-inline ";
-
-                    if (job.status === "pending") {
-                      badgeClass += "bg-info";
-                    } else if (job.status === "approved") {
-                      badgeClass += "color-status-approved";
-                    } else {
-                      badgeClass += "color-status-reject";
-                    }
-
-                    return (
-                      <span className={badgeClass}>{job.status}</span>
-                    );
-                  })()}
-                </td>
-
-                <td>
-                  <p className="text-muted mb-0">{job.createdAt}</p>
-                </td>
-
-                <td>
-                  <p className="fw-normal mb-1">{job.jobRole}</p>
-                  <p className="text-muted mb-0">{job.joblevel}</p>
-                </td>
-                <td>
-                  <button type="button" className="btn btn-primary me-3">
-                    See Apllecation
-                  </button>
-                </td>
-              </tr>
-            ))}
-          </tbody>
-        </table>
-      </div>
+                  <div class="input">
+                    <label htmlFor="lastname">Last Name:</label>
+                    <input
+                      type="text"
+                      className="input-field"
+                      id="last_name"
+                      name="lastname"
+                      onChange={handleChange}
+                    />
+                  </div>
+                  <div class="input">
+                    <label htmlFor="location">Username:</label>
+                    <input
+                      type="text"
+                      className="input-field"
+                      id="username"
+                      name="username"
+                      onChange={handleChange}
+                    />
+                  </div>
+                  <div class="input">
+                    <label htmlFor="birthday">Birthday:</label>
+                    <input
+                      type="date"
+                      className="input-field"
+                      id="birthday"
+                      name="birthday"
+                      // value={birthday}
+                      onChange={handleChange}
+                    />
+                  </div>
+                  <div class="input">
+                    <label htmlFor="phone">Phone Number:</label>
+                    <input
+                      type="tel"
+                      className="input-field"
+                      id="phone"
+                      name="phone"
+                      onChange={handleChange}
+                    />
+                  </div>
+                  <div class="input   ">
+                    <label htmlFor="avatar">Picture:</label>
+                    <input
+                      type="file"
+                      className="input-field"
+                      id="avatar"
+                      name="avatar"
+                      // value={avatar}
+                      // onChange={handleChangeImage}
+                    />
+                  </div>
+                </div>
+              </form>
+            </div>
+          </div>
+        </Col>
+      </Row>
     </>
   );
 };
@@ -122,9 +239,6 @@ export default PostJob;
 // }
 // export default AllAplications
 
-
-
-
 // import { hasFormSubmit } from '@testing-library/user-event/dist/utils';
 // import React, { useState } from 'react'
 // import { useNavigate } from 'react-router-dom';
@@ -140,16 +254,15 @@ export default PostJob;
 //     const [companyId , setCompanyId] = useState(JSON.parse(localStorage.getItem('companyData'))[0].id);
 //     const navigate = useNavigate();
 
-
 //     return (
 //         <form className='post-job-form' onSubmit={onSubmit}>
 //             <h2>Post Job</h2>
 //             <div className="row">
 //                 <div className="col-md-6 input-box">
 //                     <p>title</p>
-//                     <input 
-//                         type="text" 
-//                         placeholder='Job Title' 
+//                     <input
+//                         type="text"
+//                         placeholder='Job Title'
 //                         required
 //                         value={title}
 //                         onChange={(e) => setTitle(e.target.value)}
@@ -157,7 +270,7 @@ export default PostJob;
 //                 </div>
 //                 <div className="col-md-6 input-box">
 //                     <p>category</p>
-//                     <select 
+//                     <select
 //                         required
 //                         value={category}
 //                         onChange={(e) => setCategory(e.target.value)}
@@ -174,8 +287,8 @@ export default PostJob;
 //                 </div>
 //                 <div className="col-md-6 input-box">
 //                     <p>type of employment</p>
-//                     <select 
-//                         required 
+//                     <select
+//                         required
 //                         value={typeOfEmployment}
 //                         onChange={(e) => setTypeOfEmployment(e.target.value)}
 //                     >
@@ -185,7 +298,7 @@ export default PostJob;
 //                 </div>
 //                 <div className="col-md-6 input-box">
 //                     <p>job Level</p>
-//                     <select 
+//                     <select
 //                         required
 //                         value={jobLevel}
 //                         onChange={(e) => setJobLevel(e.target.value)}
@@ -197,8 +310,8 @@ export default PostJob;
 //                 </div>
 //                 <div className="col-md-6 input-box">
 //                     <p>capacity</p>
-//                     <input 
-//                         type="number" 
+//                     <input
+//                         type="number"
 //                         min={1}
 //                         required
 //                         value={capacity}
@@ -207,15 +320,15 @@ export default PostJob;
 //                 </div>
 //                 <div className="col-md-6 input-box">
 //                     <p>date</p>
-//                     <input 
-//                         type="date" 
-//                         value={formatDate()} 
+//                     <input
+//                         type="date"
+//                         value={formatDate()}
 //                         disabled/>
 //                 </div>
 //                 <div className="col-12 input-box">
 //                     <p>Description</p>
-//                     <textarea 
-//                         rows='5' 
+//                     <textarea
+//                         rows='5'
 //                         placeholder='Job Description'
 //                         value={desc}
 //                         required
@@ -260,6 +373,3 @@ export default PostJob;
 //     }
 // }
 // export default PostJob
-
-
-

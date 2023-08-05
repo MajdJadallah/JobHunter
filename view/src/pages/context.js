@@ -1,3 +1,34 @@
+import React, { createContext, useContext, useState } from "react";
+
+// Create a new context for the signup data
+const SignUpContext = createContext();
+
+// Custom hook to access the signup data
+export function useSignUpContext() {
+  return useContext(SignUpContext);
+}
+
+// The provider component to wrap around the application
+export function SignUpProvider({ children }) {
+  const [userData, setUserData] = useState({
+    name: "",
+    email: "",
+    password: "",
+    isJobseeker: false,
+    isCompany: false,
+  });
+
+  const onSubmit = (data) => {
+    setUserData(data);
+  };
+
+  return (
+    <SignUpContext.Provider value={{ userData, onSubmit }}>
+      {children}
+    </SignUpContext.Provider>
+  );
+}
+
 // import React, { useState, useContext, createContext } from "react";
 
 // // Step 1: Create a context for the form data
@@ -49,34 +80,3 @@
 //     </SignUpContext.Provider>
 //   );
 // };
-
-import React, { createContext, useContext, useState } from "react";
-
-// Create a new context for the signup data
-const SignUpContext = createContext();
-
-// Custom hook to access the signup data
-export function useSignUpContext() {
-  return useContext(SignUpContext);
-}
-
-// The provider component to wrap around the application
-export function SignUpProvider({ children }) {
-  const [userData, setUserData] = useState({
-    name: "",
-    email: "",
-    password: "",
-    isJobseeker: false,
-    isCompany: false,
-  });
-
-  const onSubmit = (data) => {
-    setUserData(data);
-  };
-
-  return (
-    <SignUpContext.Provider value={{ userData, onSubmit }}>
-      {children}
-    </SignUpContext.Provider>
-  );
-}
