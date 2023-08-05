@@ -4,6 +4,7 @@ import instagram from '../images/instagram.svg'
 import linkedin from '../images/linkedin.svg'
 import phone from '../images/telephone-fill.svg'
 import location from '../images/geo-alt-fill.svg'
+import { Link } from 'react-router-dom'
 function Footer() {
   return (
     <div id='footer'>
@@ -29,14 +30,14 @@ function Footer() {
         <h4  className="h4Footer">Categories </h4>
         <div>
         <ul className='footerlist'>
-            <li>Accounting</li>
-            <li>Business</li>
-            <li>Engineering</li>
-            <li>Marketing</li>
-            <li>Medical</li>
-            <li>Sales</li>
-            <li>Teaching</li>
-            <li>Technology</li>
+            <li><Link to={`/findjob/Accounting`}className='footer_link_categories'>Accounting</Link></li>
+            <li><Link to={`/findjob/Business`} className='footer_link_categories'>Business</Link></li>
+            <li><Link to={`/findjob/Engineering`} className='footer_link_categories'>Engineering</Link></li>
+            <li><Link to={`/findjob/Marketing`}className='footer_link_categories'>Marketing</Link></li>
+            <li><Link to={`/findjob/Medical`}className='footer_link_categories'>Medical</Link></li>
+            <li><Link to={`/findjob/Sales`}className='footer_link_categories'>Sales</Link></li>
+            <li><Link to={`/findjob/Teaching`}className='footer_link_categories'>Teaching</Link></li>
+            <li><Link to={`/findjob/Technology`}className='footer_link_categories'>Technology</Link></li>
           </ul>
         </div>
         </div>

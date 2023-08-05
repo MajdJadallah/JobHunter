@@ -33,7 +33,16 @@ const getAllJobs = async (req, res) => {
   const jobs = await jobSchema.find();
   res.json(jobs);
 };
-
+const getCategories = async (req, res) => {
+  try {
+    const category = req.params.category;
+    const categories = await jobSchema.find({ category });
+    res.status(200).json({ categories: categories });
+  } catch (error) {
+    console.error('Error fetching categories:', error);
+    res.status(500).json({ error: 'Internal Server Error' });
+  }
+};
 const softDeletejob = async (req, res) => {
   const { id } = req.params.id;
 
@@ -52,4 +61,4 @@ const softDeletejob = async (req, res) => {
   }
 };
 
-module.exports = { postJob, getAllJobs,softDeletejob };
+module.exports = { postJob, getAllJobs,softDeletejob,getCategories };

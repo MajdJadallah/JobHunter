@@ -656,10 +656,7 @@ align-items: center;
   border-radius: 5px;
   width: 5rem;
   margin-left: 45%;
-  -webkit-border-radius: ;
-  -moz-border-radius: ;
-  -ms-border-radius: ;
-  -o-border-radius: ;
+
 }
 #appliedForm {
   margin: auto;
@@ -1399,6 +1396,10 @@ body {
 }
 .footerlist li {
   color: #fff;
+}
+.footer_link_categories{
+  color: white;
+  text-decoration: none;
 }
 #follow {
   color: #fff;
