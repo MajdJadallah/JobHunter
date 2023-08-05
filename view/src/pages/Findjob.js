@@ -21,7 +21,6 @@ const Findjob = () => {
         <div className="row m-0 g-5">
           <TestSearch/>
         </div>
-        
 
       </div>
       <Footer/>
