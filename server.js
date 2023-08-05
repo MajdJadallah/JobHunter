@@ -39,14 +39,14 @@ app.use("/jobs", jobsRouter);
 
 //database and server connections
 mongoose
-  .connect(process.env.MONGO_URL, {
+  .connect("mongodb+srv://mohammadaldoer:Fev78fpQovovxBQ6@cluster0.ojpsgxa.mongodb.net/loginProject?retryWrites=true&w=majority", {
     useNewUrlParser: true,
     useUnifiedTopology: true,
   })
   .then(() => {
     console.log("connected to DB");
-    app.listen(process.env.PORT, () => {
-      console.log(`app is listening on port ${process.env.PORT}`);
+    app.listen(8000, () => {
+      console.log(`app is listening on port ${8000}`);
     });
   })
   .catch((err) => {
