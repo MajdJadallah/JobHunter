@@ -331,5 +331,4 @@ function JobSearch() {
     </>
   );
 }
-
 export default JobSearch;
