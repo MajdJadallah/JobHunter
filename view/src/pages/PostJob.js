@@ -154,61 +154,69 @@ const PostJob = () => {
                     <input
                       type="text"
                       className="input-field"
-                      id="first_name"
-                      name="firstname"
+                      id="jobTitle"
+                      name="jobTitle"
                       onChange={handleChange}
                     />
                   </div>
                   <div class="input">
-                    <label htmlFor="lastname">Last Name:</label>
+                    <label htmlFor="lastname">Job Description:</label>
                     <input
                       type="text"
                       className="input-field"
-                      id="last_name"
-                      name="lastname"
+                      id="jobDescription"
+                      name="jobDescription"
                       onChange={handleChange}
                     />
                   </div>
                   <div class="input">
-                    <label htmlFor="location">Username:</label>
-                    <input
+                    <label htmlFor="category">Category:</label>
+                    <select
                       type="text"
-                      className="input-field"
-                      id="username"
-                      name="username"
+                      className=" input-field"
+                      id="industry"
+                      name="industry"
                       onChange={handleChange}
-                    />
+                    >
+                      <option>choose</option>
+                      <option>technology</option>
+                      <option>engineering</option>
+                      <option>business</option>
+                      <option>marketing</option>
+                      <option>sales</option>
+                      <option>medical</option>
+                      <option>teaching</option>
+                      <option>accounting</option>
+                    </select>
                   </div>
                   <div class="input">
-                    <label htmlFor="birthday">Birthday:</label>
+                    <label htmlFor="typeOfEmployment">Type Of Employment:</label>
                     <input
                       type="date"
                       className="input-field"
-                      id="birthday"
-                      name="birthday"
+                      id="typeOfEmployment"
+                      name="typeOfEmployment"
                       // value={birthday}
                       onChange={handleChange}
                     />
                   </div>
                   <div class="input">
-                    <label htmlFor="phone">Phone Number:</label>
+                    <label htmlFor="jobLevel">Job Level:</label>
                     <input
                       type="tel"
                       className="input-field"
-                      id="phone"
-                      name="phone"
+                      id="jobLevel"
+                      name="jobLevel"
                       onChange={handleChange}
                     />
                   </div>
                   <div class="input   ">
-                    <label htmlFor="avatar">Picture:</label>
+                    <label htmlFor="capacity">Capacity:</label>
                     <input
-                      type="file"
+                      type="number"
                       className="input-field"
-                      id="avatar"
-                      name="avatar"
-                      // value={avatar}
-                      // onChange={handleChangeImage}
+                      id="capacity"
+                      name="capacity"
                     />
                   </div>
                 </div>

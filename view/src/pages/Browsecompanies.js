@@ -36,7 +36,7 @@ const Browsecompanies = () => {
 
   const filteredList = companies.filter((company) => {
     const jobTitle = company.name.toLowerCase();
-    const jobCategory = company.industry.toLowerCase();
+    const jobCategory = company.industry?.toLowerCase() || ""
     const searchTerm = search.toLowerCase();
     const categoryFilter =
     selectedIndustries.length === 0 ||
@@ -54,6 +54,7 @@ const Browsecompanies = () => {
     "Engineering",
     "Business",
   ];
+  console.log(companies)
   //render------------------------------------------------------------------------------------->
   return (
     <div className="browse" style={{ background: "#fff" }}>
@@ -120,7 +121,7 @@ const Browsecompanies = () => {
               </div>
               {filteredList.length > 0 ? (
                 filteredList.map((company) => (
-                  <Col key={company.id} md={4} className="h-100">
+                  <Col key={company._id} md={4} className="h-100">
                     <Card
                       style={{
                         width: "20rem",
@@ -151,7 +152,7 @@ const Browsecompanies = () => {
                           Some quick example text to build on the card title and
                           make up the bulk of the card's content.
                         </Card.Text>
-                        <Link to={`/companydetails/${company.id}`} id="more">
+                        <Link to={`/companydetails/${company._id}`} id="more">
                           Details
                         </Link>
                       </Card.Body>
