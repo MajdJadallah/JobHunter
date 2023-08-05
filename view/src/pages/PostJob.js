@@ -2,18 +2,61 @@ import { useEffect, useState } from "react";
 import axios from "axios";
 import { Col, Row, Card } from "react-bootstrap";
 import { Link } from "react-router-dom";
-import "../App.css";
+import "./SignUpCompany.css";
 
 const PostJob = () => {
+  const [name, setName] = useState("discord");
   const [jobs, setJobs] = useState([]);
-  const [allJobs, setAllJobs] = useState([]);
+  const [formData, setFormData] = useState({
+    companyName: name,
+    title: "",
+    desc: "",
+    category: "",
+    typeOfEmployment: "",
+    jobLevel: "",
+    capacity: "",
+    applied: 0,
+  });
+  // const [allJobs, setAllJobs] = useState([]);
+  const [selectedCategory, setSelectedCategory] = useState("");
+  const [isModalOpen, setIsModalOpen] = useState(false);
+
+
+  const handleChange = (e) => {
+    const { name, value } = e.target;
+    setFormData((prevFormData) => ({
+      ...prevFormData,
+      [name]: value,
+    }));
+  };
+  const handleCategoryChange = (e) => {
+    const { name, value } = e.target;
+    setFormData((prevFormData) => ({
+      ...prevFormData,
+      [name]: value,
+    }));
+    setSelectedCategory(e.target.value);
+  };
+
+  const handleEditProfile = () => {
+    setIsModalOpen(true);
+  };
+
+  const handleCloseModal = () => {
+    setIsModalOpen(false);
+  };
+
   useEffect(() => {
     axios
       .get("http://localhost:8080/jobs/getjobs")
       .then((response) => {
-        setJobs(response.data.filter((job) => job.companyName === "discord"));
-        setAllJobs(response.data);
-        console.log("response.data", response.data);
+        setJobs(
+          response.data.filter(
+            (job) => job.companyName.toLowerCase() === "discord"
+          )
+        );
+        // setAllJobs(response.data);
+        console.log(response.data);
       })
       .catch((error) => {
         // Handle error
@@ -21,92 +64,25 @@ const PostJob = () => {
       });
   }, []);
 
-  const handleChange = (event) => {
-    const { name, value } = event.target;
-    // Use the individual state setters to update the state for each input field
-    // switch (name) {
-    //   case "name":
-    //     setName(event.target.value);
-    //     break;
-    //   case "firstname":
-    //     setfirstname(event.target.value);
-    //     break;
-    //   case "lastname":
-    //     setlastname(event.target.value);
-    //     break;
-    //   case "username":
-    //     setusername(event.target.value);
-    //     break;
-    //   case "password":
-    //     setPassword(event.target.value);
-    //     break;
-    //   case "email":
-    //     setEmail(event.target.value);
-    //     break;
-    //   case "avatar":
-    //     setAvatar(event.target.value);
-    //     break;
-    //   case "birthday":
-    //     setBirthday(event.target.value);
-    //     break;
-    //   case "phone":
-    //     setphone(event.target.value);
-    //     break;
-
-    //   case "jobrole":
-    //     setjobrole(event.target.value);
-    //     break;
-
-    //   case "university":
-    //     setUniversity(event.target.value);
-    //     break;
-    //   case "Graduation":
-    //     setGraduation(event.target.value);
-    //     break;
-
-    //   case "speciality":
-    //     setspeciality(event.target.value);
-    //     break;
-    //   case "yearofgraduation":
-    //     setyearofgraduation(event.target.value);
-    //     break;
-    //   case "summary":
-    //     setSummary(event.target.value);
-    //     break;
-    //   case "skills":
-    //     setSkills(event.target.value);
-    //     break;
-    //   case "qualification":
-    //     setQualification(event.target.value);
-    //     break;
-    //   default:
-    //     break;
-    // }
-  };
-
   const handleSubmit = async (e) => {
     e.preventDefault();
     const response = await axios
       //companyName by default
-      .post("http://localhost:8080/users/signup", {
-        // firstname,
-        // lastname,
-        // username,
-        // phone,
-        // birthday,
-        // skills,
-        // summary,
-        // jobrole,
-        // yearofgraduation,
-        // univarsity,
-        // speciality,
-        // avatar,
-        // email,
-        // password,
-        // id:id
-      })
+      .post("http://localhost:8080/jobs/postjob", formData)
       .then((response) => {
-        console.log(response.data);
+        console.log("response.data", response.data);
+        setIsModalOpen(true);
+        setFormData ({
+          companyName: name,
+          title: "",
+          desc: "",
+          category: "",
+          typeOfEmployment: "",
+          jobLevel: "",
+          capacity: "",
+          applied: 0,
+        })
+        setSelectedCategory(null)
       })
       .catch((error) => {
         console.log(`Error fetching personal info: ${error}`);
@@ -117,7 +93,8 @@ const PostJob = () => {
     // Example:
     console.log(response);
   };
-  console.log("jobs", jobs);
+  // console.log("jobs", jobs);
+  console.log("formdata", formData);
   return (
     <>
       <nav className="navbar navbar-light bg-light">
@@ -131,7 +108,7 @@ const PostJob = () => {
       <Row className="p-5">
         <Col className="jobs">
           <h1 className="text-center">All Jobs</h1>
-          {allJobs.map((job) => (
+          {jobs.map((job) => (
             <Card className="mb-3">
               <Card.Body>
                 <Card.Title id="title-job">{job.title}</Card.Title>
@@ -149,78 +126,100 @@ const PostJob = () => {
             <div id="">
               <form onSubmit={handleSubmit} id="userData-Form">
                 <div className="personalInfo card-div">
-                  <div class="input">
+                  <div className="input">
                     <label htmlFor="title">Job Title:</label>
                     <input
                       type="text"
                       className="input-field"
-                      id="jobTitle"
-                      name="jobTitle"
+                      id="title"
+                      name="title"
+                      value={formData.title}
                       onChange={handleChange}
                     />
                   </div>
-                  <div class="input">
+                  <div className="input">
                     <label htmlFor="lastname">Job Description:</label>
                     <input
                       type="text"
                       className="input-field"
-                      id="jobDescription"
-                      name="jobDescription"
+                      id="desc"
+                      name="desc"
+                      value={formData.desc}
                       onChange={handleChange}
                     />
                   </div>
-                  <div class="input">
+                  <div className="input">
                     <label htmlFor="category">Category:</label>
                     <select
-                      type="text"
-                      className=" input-field"
-                      id="industry"
-                      name="industry"
-                      onChange={handleChange}
+                      className="input-field"
+                      id="category"
+                      name="category"
+                      value={selectedCategory}
+                      onChange={handleCategoryChange}
                     >
-                      <option>choose</option>
-                      <option>technology</option>
-                      <option>engineering</option>
-                      <option>business</option>
-                      <option>marketing</option>
-                      <option>sales</option>
-                      <option>medical</option>
-                      <option>teaching</option>
-                      <option>accounting</option>
+                      {!selectedCategory && (
+                        <option value="" disabled>
+                          Choose a Category
+                        </option>
+                      )}
+                      <option value="technology">Technology</option>
+                      <option value="engineering">Engineering</option>
+                      <option value="business">Business</option>
+                      <option value="marketing">Marketing</option>
+                      <option value="sales">Sales</option>
+                      <option value="medical">Medical</option>
+                      <option value="teaching">Teaching</option>
+                      <option value="accounting">Accounting</option>
                     </select>
                   </div>
-                  <div class="input">
-                    <label htmlFor="typeOfEmployment">Type Of Employment:</label>
+                  <div className="input">
+                    <label htmlFor="typeOfEmployment">
+                      Type Of Employment:
+                    </label>
                     <input
-                      type="date"
+                      type="text"
                       className="input-field"
                       id="typeOfEmployment"
                       name="typeOfEmployment"
-                      // value={birthday}
+                      value={formData.typeOfEmployment}
                       onChange={handleChange}
                     />
                   </div>
-                  <div class="input">
+                  <div className="input">
                     <label htmlFor="jobLevel">Job Level:</label>
                     <input
                       type="tel"
                       className="input-field"
                       id="jobLevel"
                       name="jobLevel"
+                      value={formData.jobLevel}
                       onChange={handleChange}
                     />
                   </div>
-                  <div class="input   ">
+                  <div className="input   ">
                     <label htmlFor="capacity">Capacity:</label>
                     <input
                       type="number"
                       className="input-field"
                       id="capacity"
                       name="capacity"
+                      value={formData.capacity}
+                      onChange={handleChange}
                     />
+                  </div>
+                  <div className="d-flex justify-content-center">
+                    <button
+                      id="submitPost"
+                      type="submit"
+                      className="submit p-1"
+                      onClick={handleSubmit}
+                    >
+                      Submit
+                    </button>
                   </div>
                 </div>
               </form>
+              <p>{selectedCategory}</p>
             </div>
           </div>
         </Col>
@@ -230,154 +229,3 @@ const PostJob = () => {
 };
 
 export default PostJob;
-
-// import useFetch from "../customhooks/useFetch";
-// import ApplicationsTable from "./ApplicationsTable";
-
-// const AllAplications = () => {
-//     let companyData = JSON.parse(localStorage.getItem('companyData'))[0];
-//     const {data: applications , error , isPending} = useFetch('http://localhost:5000/application');
-//     return (
-//         <>
-//             {isPending && <div>Loading ...</div>}
-//             {error && <div>{error}</div>}
-//             {applications && <ApplicationsTable applications={applications} companyData={companyData}/>}
-//         </>
-//     )
-// }
-// export default AllAplications
-
-// import { hasFormSubmit } from '@testing-library/user-event/dist/utils';
-// import React, { useState } from 'react'
-// import { useNavigate } from 'react-router-dom';
-
-// const PostJob = () => {
-//     const [title , setTitle] = useState('');
-//     const [category , setCategory] = useState('Technology');
-//     const [typeOfEmployment , setTypeOfEmployment] = useState('full-time');
-//     const [jobLevel , setJobLevel] = useState('Junior');
-//     const [capacity , setCapacity] = useState(1);
-//     const [dateOfPost , setDateOfPost] = useState(formatDate().split('-').join('/'));
-//     const [desc , setDesc] = useState('');
-//     const [companyId , setCompanyId] = useState(JSON.parse(localStorage.getItem('companyData'))[0].id);
-//     const navigate = useNavigate();
-
-//     return (
-//         <form className='post-job-form' onSubmit={onSubmit}>
-//             <h2>Post Job</h2>
-//             <div className="row">
-//                 <div className="col-md-6 input-box">
-//                     <p>title</p>
-//                     <input
-//                         type="text"
-//                         placeholder='Job Title'
-//                         required
-//                         value={title}
-//                         onChange={(e) => setTitle(e.target.value)}
-//                     />
-//                 </div>
-//                 <div className="col-md-6 input-box">
-//                     <p>category</p>
-//                     <select
-//                         required
-//                         value={category}
-//                         onChange={(e) => setCategory(e.target.value)}
-//                     >
-//                         <option value="Technology">Technology</option>
-//                         <option value="Engineering">Engineering</option>
-//                         <option value="Business">Business</option>
-//                         <option value="Meadical">Meadical</option>
-//                         <option value="Sales">Sales</option>
-//                         <option value="Marketing">Marketing</option>
-//                         <option value="Accounting">Accounting</option>
-//                         <option value="Teaching">Teaching</option>
-//                     </select>
-//                 </div>
-//                 <div className="col-md-6 input-box">
-//                     <p>type of employment</p>
-//                     <select
-//                         required
-//                         value={typeOfEmployment}
-//                         onChange={(e) => setTypeOfEmployment(e.target.value)}
-//                     >
-//                         <option value="full-time">full-time</option>
-//                         <option value="part-time">part-time</option>
-//                     </select>
-//                 </div>
-//                 <div className="col-md-6 input-box">
-//                     <p>job Level</p>
-//                     <select
-//                         required
-//                         value={jobLevel}
-//                         onChange={(e) => setJobLevel(e.target.value)}
-//                     >
-//                         <option value="Junior">Junior</option>
-//                         <option value="Senior">Senior</option>
-//                         <option value="Expert">Expert</option>
-//                     </select>
-//                 </div>
-//                 <div className="col-md-6 input-box">
-//                     <p>capacity</p>
-//                     <input
-//                         type="number"
-//                         min={1}
-//                         required
-//                         value={capacity}
-//                         onChange={(e) => setCapacity(e.target.value)}
-//                     />
-//                 </div>
-//                 <div className="col-md-6 input-box">
-//                     <p>date</p>
-//                     <input
-//                         type="date"
-//                         value={formatDate()}
-//                         disabled/>
-//                 </div>
-//                 <div className="col-12 input-box">
-//                     <p>Description</p>
-//                     <textarea
-//                         rows='5'
-//                         placeholder='Job Description'
-//                         value={desc}
-//                         required
-//                         onInput={(e) => setDesc(e.target.value)}
-//                     ></textarea>
-//                 </div>
-//                 <div className="col-md input-box d-flex justify-content-end">
-//                     <button type='submit' className='btn-post'>Post Job</button>
-//                 </div>
-//             </div>
-//         </form>
-//     )
-//     function onSubmit(e){
-//         e.preventDefault();
-//         console.log(category);
-//         console.log(typeOfEmployment)
-//         console.log(jobLevel)
-//         console.log(capacity)
-//         console.log(dateOfPost)
-
-//         const job = {title , desc ,companyId , dateOfPost , category , typeOfEmployment , jobLevel ,capacity , applied: 0}
-
-//         fetch('http://localhost:5000/jobs' , {
-//             method: 'POST',
-//             headers: { "Content-Type": 'application/json'},
-//             body: JSON.stringify(job)
-//         })
-//         .then(() => {
-//             console.log("new Job added");
-//         })
-//         navigate('/dashboard');
-//     }
-//     function padTo2Digits(num) {
-//         return num.toString().padStart(2, '0');
-//     }
-//     function formatDate(date = new Date()) {
-//         return [
-//             date.getFullYear(),
-//             padTo2Digits(date.getMonth() + 1),
-//             padTo2Digits(date.getDate()),
-//         ].join('-');
-//     }
-// }
-// export default PostJob

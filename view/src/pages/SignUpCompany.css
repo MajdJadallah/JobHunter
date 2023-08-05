@@ -54,7 +54,7 @@ body {
   }
   
   /* CSS for the form submit button */
-  .form-group .submit-btn {
+  .form-group .submit-btn, .submit {
     padding: 10px 20px;
     background-color: #007bff;
     color: #fff;
@@ -64,7 +64,6 @@ body {
   }
   
   /* CSS for the form submit button on hover */
-  .form-group .submit-btn:hover {
+  .form-group .submit-btn:hover, .submit {
     background-color: #0056b3;
   }
-  

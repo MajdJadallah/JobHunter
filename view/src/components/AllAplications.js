@@ -3,13 +3,14 @@ import axios from "axios";
 
 const AllAplications = () => {
   const [applications, setApplications] = useState([]);
+  const [companyName, setCompanyName] = useState("discord")
   useEffect(() => {
     axios
       .get("http://localhost:8080/applications/getapplications")
       .then((response) => {
         setApplications(
           response.data.filter(
-            (application) => application.companyName === "apple"
+            (application) => application.companyName.toLowerCase() === companyName
           )
         );
         console.log("response.data", response.data);

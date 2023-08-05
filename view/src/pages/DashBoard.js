@@ -12,7 +12,7 @@ const DashBoard = () => {
     }
     function logOutbtn() {
         window.sessionStorage.clear();
-        navigate('/login');
+        navigate('/signin');
     }
     return (
         <div className='dash-board'>
