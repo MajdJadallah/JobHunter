@@ -20,21 +20,42 @@ const Login = () => {
 
   async function onSubmit(e) {
     e.preventDefault();
+    // try {
+    //   const response = await axios.post("http://localhost:8080/users/signin", {
+    //     email,
+    //     password,
+    //   });
+    //   const userinfo = response.data.userId;
+    //   localStorage.clear();
+    //   sessionStorage.clear();
+    //   if (userinfo.length > 1) {
+    //     localStorage.setItem("userData", JSON.stringify(userinfo));
+    //     sessionStorage.setItem("userActive", true);
+
+    //     // Create a new instance of Cookies and set the access_token cookie
+    //     const cookies = new Cookies();
+    //     cookies.set("access_token", userinfo.token, { path: "/" });
+
+    //     navigate("/");
+    //   }
+    // } catch (error) {
+    //   console.log(error);
+    // }
     try {
       const response = await axios.post("http://localhost:8080/users/signin", {
         email,
         password,
       });
-      const userinfo = response.data.userId;
+      const companyinfo = response.data.userId;
       localStorage.clear();
       sessionStorage.clear();
-      if (userinfo.length > 1) {
-        localStorage.setItem("userData", JSON.stringify(userinfo));
+      if (companyinfo.length > 1) {
+        localStorage.setItem("userData", JSON.stringify(companyinfo));
         sessionStorage.setItem("userActive", true);
 
         // Create a new instance of Cookies and set the access_token cookie
         const cookies = new Cookies();
-        cookies.set("access_token", userinfo.token, { path: "/" });
+        cookies.set("access_token", companyinfo.token, { path: "/" });
 
         navigate("/");
       }

@@ -95,6 +95,18 @@ export default function EditButton() {
     e.preventDefault();
     // Here, you can handle the form submission and update the user's profile data
     console.log("Form data:", formData);
+    axios
+    .patch(`http://localhost:8080/users/editinfo/${profileData._id}`, formData, {
+    })
+    .then((response) => {
+      // The data has been successfully updated
+      console.log("Data updated successfully:", response.data);
+      // You can choose to show a success message to the user if needed
+    })
+    .catch((error) => {
+      console.error("Error updating data:", error);
+      // You can show an error message to the user if needed
+    });
     handleCloseModal();
   };
   const handleChangeImage = (event) => {
@@ -112,6 +124,7 @@ export default function EditButton() {
   const [profileData, setProfileData] = useState([]);
   const [applications, setApplications] = useState([]);
   const [isPendding, setIsPendding] = useState(true);
+
 
   useEffect(() => {
     // Get the JWT token from localStorage
@@ -132,6 +145,7 @@ export default function EditButton() {
       })
       .then((response) => {
         setProfileData(response.data);
+        setFormData(response.data);
         email = response.data.email;
         setIsPendding(false);
       })
@@ -152,7 +166,6 @@ export default function EditButton() {
         console.error("AxiosError:", error);
       });
   }, []);
-
   return (
     <div>
       <Header />
@@ -316,11 +329,25 @@ export default function EditButton() {
                 margin: "auto",
               }}
             >
-              <label className="labelEdit">Name:</label>
+              <label className="labelEdit">First Name:</label>
               <input
                 type="text"
-                name="name"
-                value={formData.name}
+                name="firstname"
+                value={formData.firstname}
+                onChange={handleChange}
+              />
+              <label className="labelEdit">Last Name:</label>
+              <input
+                type="text"
+                name="lastname"
+                value={formData.lastname}
+                onChange={handleChange}
+              />
+              <label className="labelEdit">Username:</label>
+              <input
+                type="text"
+                name="username"
+                value={formData.username}
                 onChange={handleChange}
               />
               <label className="labelEdit">Email:</label>
@@ -334,28 +361,21 @@ export default function EditButton() {
               <input
                 type="text"
                 name="yearOfGraduation"
-                value={formData.yearOfGraduation}
-                onChange={handleChange}
-              />
-              <label className="labelEdit">Username:</label>
-              <input
-                type="text"
-                name="username"
-                value={formData.username}
+                value={formData.yearofgraduation}
                 onChange={handleChange}
               />
               <label className="labelEdit">University:</label>
               <input
                 type="text"
                 name="university"
-                value={formData.university}
+                value={formData.univarsity}
                 onChange={handleChange}
               />
               <label className="labelEdit">Speciality:</label>
               <input
                 type="text"
                 name="specialty"
-                value={formData.specialty}
+                value={formData.speciality}
                 onChange={handleChange}
               />
               <label className="labelEdit">Summary:</label>
@@ -368,7 +388,6 @@ export default function EditButton() {
               <input
                 type="file"
                 name="avatar"
-                value={formData.summary}
                 onChange={handleChangeImage}
               />
               <button type="button" onClick={handleCloseModal} style={closeBtn}>
