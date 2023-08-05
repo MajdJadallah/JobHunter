@@ -108,51 +108,106 @@ const SignUpUser = () => {
 
   return (
     <>
-      <Header />
-      <div>
-        <h1>ProfileUser signUp</h1>
-        <form onSubmit={handleSubmit}>
-          {/* Name and email fields are already pre-filled */}
-          <input
-            type="text"
-            name="avatar"
-            placeholder="Enter your avatar"
-            value={avatar}
-            onChange={handleChange}
-          />
-          <input
-            type="password"
-            name="password"
-            placeholder="Enter your password"
-            value={password}
-            onChange={handleChange}
-          />
-          {/* Add more form fields as needed */}
-          <input
-            type="text"
-            name="jobTitle"
-            placeholder="Enter your job title"
-            value={jobTitle}
-            onChange={handleChange}
-          />
-          <input
-            type="date"
-            name="birthday"
-            value={birthday}
-            onChange={handleChange}
-          />
-          <input
-            type="text"
-            name="phoneNumber"
-            placeholder="Enter your phone number"
-            value={phoneNumber}
-            onChange={handleChange}
-          />
-          {/* Add more form fields as needed */}
-          <button type="submit">Submit</button>
-        </form>
-      </div>
-    </>
+    <Header />
+    <div>
+      <h1>ProfileUser signUp</h1>
+      <form onSubmit={handleSubmit}>
+        {/* Input fields for the remaining hooks */}
+        <input
+          type="text"
+          name="avatar"
+          placeholder="Enter your avatar"
+          value={avatar}
+          onChange={handleChange}
+        />
+        <input
+          type="text"
+          name="jobTitle"
+          placeholder="Enter your job title"
+          value={jobTitle}
+          onChange={handleChange}
+        />
+        <input
+          type="date"
+          name="birthday"
+          value={birthday}
+          onChange={handleChange}
+        />
+        <input
+          type="text"
+          name="phoneNumber"
+          placeholder="Enter your phone number"
+          value={phoneNumber}
+          onChange={handleChange}
+        />
+        <input
+          type="text"
+          name="jobRole"
+          placeholder="Enter your job role"
+          value={jobRole}
+          onChange={handleChange}
+        />
+        <input
+          type="text"
+          name="experience"
+          placeholder="Enter your experience"
+          value={experience}
+          onChange={handleChange}
+        />
+        <input
+          type="text"
+          name="location"
+          placeholder="Enter your location"
+          value={location}
+          onChange={handleChange}
+        />
+        <input
+          type="text"
+          name="qualification"
+          placeholder="Enter your qualification"
+          value={qualification}
+          onChange={handleChange}
+        />
+        <input
+          type="text"
+          name="education"
+          placeholder="Enter your education"
+          value={education}
+          onChange={handleChange}
+        />
+        <input
+          type="text"
+          name="university"
+          placeholder="Enter your university"
+          value={university}
+          onChange={handleChange}
+        />
+        <input
+          type="text"
+          name="Grade"
+          placeholder="Enter your Grade"
+          value={Grade}
+          onChange={handleChange}
+        />
+        <input
+          type="text"
+          name="Graduation"
+          placeholder="Enter your Graduation"
+          value={Graduation}
+          onChange={handleChange}
+        />
+        <input
+          type="text"
+          name="skills"
+          placeholder="Enter your skills"
+          value={skills}
+          onChange={handleChange}
+        />
+  
+        <button type="submit">Submit</button>
+      </form>
+    </div>
+  </>
   );
 };
 
