@@ -33,15 +33,13 @@ const CompanyDetails = () => {
     axios
       .get(`http://localhost:8080/jobs/getjobs`)
       .then((response) => {
-        // const jobsArray = response.data;
-        // console.log("jobsArray",jobsArray)
-        // console.log("filtered", jobsArray.map(job => job.companyName === company.companyName))
         setJobs(response.data.filter((job) => job.companyName === name));
       })
       .catch((error) => {
         console.error("AxiosError:", error);
       });
   }, []);
+  
   console.log(jobs);
   return (
     <div>
@@ -49,7 +47,7 @@ const CompanyDetails = () => {
       <div className="my-5 mx-0 w-100">
         <div className="d-flex justify-content-center w-100">
           <Card
-            style={{ width: "60rem" }}
+            style={{ width: "60rem",padding:".5rem 2rem 3rem " }}
             className="d-flex justify-content-center"
           >
             <Card.Img
@@ -58,51 +56,54 @@ const CompanyDetails = () => {
               src={company.logo}
             />
             <Card.Body>
-              <Card.Title>{company.name}</Card.Title>
+              <Card.Title style={{fontFamily: "'Roboto Slab', serif"}}>{company.name}</Card.Title>
               <Card.Text>
                 Some quick example text to build on the card title and make up
                 the bulk of the card's content.
               </Card.Text>
             </Card.Body>
             <ListGroup className="list-group-flush">
-              <ListGroup.Item>Indestry : {company.indusrty}</ListGroup.Item>
-              <ListGroup.Item>Countey: {company.country}</ListGroup.Item>
-              <ListGroup.Item>Email: {company.email}</ListGroup.Item>
               <ListGroup.Item>
-                <ListGroup>
-                  Contact Info
+              <span style={{fontFamily: "'Roboto Slab', serif"}}>Industry: </span> {company.industry}
+              <br></br>
+              <span style={{fontFamily: "'Roboto Slab', serif"}}>Countey: </span> {company.country}
+              <br></br>
+              <span style={{fontFamily: "'Roboto Slab', serif"}}>Email: </span> {company.email}
+              </ListGroup.Item>
+              <ListGroup.Item>
+                <ListGroup >
+                <p style={{fontFamily: "'Roboto Slab', serif"}}>Contact Information </p>
                   <ListGroup.Item>
                     <FaLinkedin />{" "}
-                    <Link to={company.contactLinkedin}>
+                    <Link to={company.contactLinkedin} 
+                    style={{textDecoration:'none', color:"#000" , fontWeight:"600"}}>
                       {company.contactLinkedin}
                     </Link>
                   </ListGroup.Item>
                   <ListGroup.Item>
                     <FaFacebookF />{" "}
-                    <Link to={company.contactFacebook}>
+                    <Link to={company.contactFacebook}
+                    style={{textDecoration:'none', color:"#000" , fontWeight:"600"}}>
                       {company.contactFacebook}
                     </Link>
                   </ListGroup.Item>
                   <ListGroup.Item>
                     <FaInstagramSquare />{" "}
-                    <Link to={company.contactInstagram}>
+                    <Link to={company.contactInstagram}
+                    style={{textDecoration:'none', color:"#000" , fontWeight:"600"}}>
                       {company.contactInstagram}
                     </Link>
                   </ListGroup.Item>
                   <ListGroup.Item>
                     <FaTwitter />{" "}
-                    <Link to={company.contactTwitter}>
+                    <Link to={company.contactTwitter}
+                    style={{textDecoration:'none', color:"#000" , fontWeight:"600"}}>
                       {company.contactTwitter}
                     </Link>
                   </ListGroup.Item>
                 </ListGroup>
               </ListGroup.Item>
             </ListGroup>
-            <Card.Body>
-              <Link to={`/companydetails/${company._id}`} id="more">
-                Details
-              </Link>
-            </Card.Body>
           </Card>
         </div>
         <div className="d-flex justify-content-center w-100 mt-5">
@@ -111,15 +112,17 @@ const CompanyDetails = () => {
             className="d-flex justify-content-center"
           >
             <Card.Body>
-              <Card.Title>Jobs</Card.Title>
+              <Card.Title
+              style={{fontFamily: "'Roboto Slab', serif"}}>Jobs</Card.Title>
             </Card.Body>
             <ListGroup className="list-group-flush">
               {jobs.map((job) => (
                 <ListGroup.Item>
-                  Job title: {job.title}<br/>
-                  
+                <span style={{fontFamily: "'Roboto Slab', serif"}}>Job title: </span>
+                   {job.title}<br/>
                   <Link to={`/companydetails/${company._id}`} id="more">
-                    Details
+                  <span style={{fontFamily: "'Roboto Slab', serif", textDecoration:"none" , color:"#000"}}>Details </span>
+
                   </Link>
                 </ListGroup.Item>
               ))}

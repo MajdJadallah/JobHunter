@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from "react";
 import Header from "../components/Header";
 import Footer from "../components/Footer";
-import { useNavigate, useParams } from "react-router-dom";
+import { useNavigate, useParams ,Link } from "react-router-dom";
 import man from "../images/man.png";
 import axios from "axios";
 function Applied() {
@@ -16,6 +16,7 @@ function Applied() {
   const [email, setEmail] = useState("");
   const [jobRole, setJobRole] = useState("");
   const [joblevel, setJobLevel] = useState("");
+  const [major, setMajor] = useState("");
   const [apply, setApply] = useState({});
   const navigate = useNavigate();
   const [currentDate, setCurrentDate] = useState("");
@@ -67,6 +68,57 @@ function Applied() {
         <form onSubmit={handleSubmit} id="appliedForm" type="submit">
           <h1 id="applyNow">Apply Now</h1>
           <div className="row g-4 AppliedPageForm">
+          <div className="col-md-6 input-box">
+              <label>First Name</label>
+              <input
+                type="text"
+                required
+                onChange={(e) => setFirstname(e.target.value)}
+              />
+            </div>
+            <div className="col-md-6 input-box">
+              <label>Last Name</label>
+              <input
+                type="text"
+                required
+                onChange={(e) => setLastname(e.target.value)}
+              />
+            </div>
+            <div className="col-md-6 input-box">
+              <label>Birthday</label>
+              <input
+                type="date"
+                required
+                onChange={(e) => setBirthday(e.target.value)}
+              />
+            </div>
+            <div className="col-md-6 input-box">
+              <label>Location</label>
+              <input
+                type="text"
+                required
+                onChange={(e) => setLocation(e.target.value)}
+              />
+            </div>
+            <div className="col-md-6 input-box">
+              <label>Email</label>
+              <input
+                type=""
+                required
+                onChange={(e) => setEmail(e.target.value)}
+              />
+            </div>
+            <div className="col-md-6 input-box">
+              <label>Phone Number</label>
+              <input
+                type="text"
+                required
+                onChange={(e) => setPhoneNumber(e.target.value)}
+              />
+            </div>
+
+
+
             <div className="col-md-6 input-box">
               <label>Company Name</label>
               <input type="text" required value={name} disabled />
@@ -92,52 +144,8 @@ function Applied() {
               />
             </div>
             <div className="col-md-6 input-box">
-              <label>First Name</label>
-              <input
-                type="text"
-                required
-                onChange={(e) => setFirstname(e.target.value)}
-              />
-            </div>
-            <div className="col-md-6 input-box">
-              <label>Last Name</label>
-              <input
-                type="text"
-                required
-                onChange={(e) => setLastname(e.target.value)}
-              />
-            </div>
-            <div className="col-md-6 input-box">
-              <label>Email</label>
-              <input
-                type=""
-                required
-                onChange={(e) => setEmail(e.target.value)}
-              />
-            </div>
-            <div className="col-md-6 input-box">
-              <label>Birthday</label>
-              <input
-                type="date"
-                required
-                onChange={(e) => setBirthday(e.target.value)}
-              />
-            </div>
-            <div className="col-md-6 input-box">
-              <label>Location</label>
-              <input
-                type="text"
-                required
-                onChange={(e) => setLocation(e.target.value)}
-              />
-            </div>
-            <div className="col-md-6 input-box">
-              <label>Phone Number</label>
-              <input
-                type="text"
-                required
-                onChange={(e) => setPhoneNumber(e.target.value)}
-              />
+              <label>Major</label>
+              <input type="text" required />
             </div>
             <div className="col-md-6 input-box">
               <label>Experience</label>
@@ -145,14 +153,6 @@ function Applied() {
                 type="text"
                 required
                 onChange={(e) => setExperience(e.target.value)}
-              />
-            </div>
-            <div className="col-md-6 input-box">
-              <label>Cv</label>
-              <input
-                type="text"
-                required
-                onChange={(e) => setCv(e.target.value)}
               />
             </div>
             <div className="col-md-12 input-box">
@@ -163,15 +163,22 @@ function Applied() {
                 onChange={(e) => setQualification(e.target.value)}
               />
             </div>
-        
             <div className="col-md-6 input-box">
               <label>Time of Apply</label>
               <input type="text" required value={currentDate} disabled />
             </div>
-            <button type="submit" id="submit">
-              Submit
-            </button>
+            <div className="col-md-6 input-box">
+              <label>Cv</label>
+              <input
+                type="file"
+                required
+                onChange={(e) => setCv(e.target.value)}
+              />
+            </div>
           </div>
+          <Link to ='/findjob' type="submit" id="submitApplication" style={{textDecoration:"none",textAlign:"center"}}>
+              Submit
+            </Link>
         </form>
       </div>
 

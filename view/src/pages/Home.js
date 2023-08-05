@@ -45,7 +45,7 @@ const Home = () => {
           <div className="col" id="welcomeText">
           <h2>Hey There, Job Hunters! 🏹 Ready To Chase That Dream Job?</h2>
           <p id="welcomeP">Let's aim high and bag that perfect opportunity together! 💼🌟</p>
-            <button id='FindJob'>Find Job</button>
+            <Link to ="/findjob" id='FindJob' style={{textDecoration:"none"}}>Find Job</Link>
           </div>
         </div>
       </div>

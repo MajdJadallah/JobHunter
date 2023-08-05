@@ -6,10 +6,12 @@ const usersRouter = require("./routers/users");
 const companiesRouter = require("./routers/companies");
 const jobsRouter = require("./routers/jobs");
 const applicationsRouter = require("./routers/applications");
+const cookieParser = require('cookie-parser');
 
 //app
 const app = express();
 const cors = require("cors");
+app.use(cookieParser());
 
 const allowedOrigins = [
   "http://localhost:3000",

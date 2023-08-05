@@ -276,6 +276,7 @@ display: flex;
 .dash-board .side-nav {
 background-color: var(--main-color);
 width: 260px;
+min-height: 725px;
 padding: 0px 10px;
 }
 .dash-board .side-nav ul {
@@ -683,6 +684,16 @@ gap:3rem;
 width: 20%;
 }
 
+#submitApplication{
+  background-color: #000;
+  padding: 0.5rem 1rem;
+  color: #fff;
+  border-radius: 7px;
+  width: 79%;
+  margin-bottom: 4rem;
+  margin-top: -4rem;
+}
+
 @media (max-width: 1024px) {
 .AppliedPageForm{
 padding:.5rem .1rem;
@@ -1088,7 +1099,9 @@ font-size: 1.2rem;
 font-weight: 600;
 text-align: center;
 }
-  
+#industry{
+background-color:#ECECEC ;
+}
 
 
 
@@ -1099,9 +1112,15 @@ text-align: center;
 
 
 
+#userData-Form{
+display: flex;
+flex-direction: column;
+gap: 2rem;
+}
 
-
-
+#userProfile{
+padding: 1% 25% 5%;
+}
 
 #userProfile input{
 background-color: #ececec;
@@ -1122,7 +1141,8 @@ gap: .5rem;
 margin-bottom: 1.5rem;
 }
 #userProfile .input label{
-width:50%
+width:50%;
+font-weight: 600;
 }
 #userProfile #submit{
 background-color: #000;
@@ -1167,6 +1187,11 @@ background-color:#F5F5F5 ;
 }
 #mainSignUp{
 height: 100vh;
+}
+#data-user{
+display: flex;
+flex-direction: column;
+gap: 2rem;
 }
 #mainSignUp #data-user{
 display: flex;
