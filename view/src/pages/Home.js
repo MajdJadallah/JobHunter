@@ -94,14 +94,14 @@ const Home = () => {
           </Col>
 
           <Col class="col">
-            <Link className="Link" to={`/findjob/Meadical`} class="card" onClick={handleCategory}>
+            <Link className="Link" to={`/findjob/Medical`} class="card" onClick={handleCategory}>
             <img
               src={medical}
               alt='tech'
               className="categoryIcon"
               />
               <p>
-                Meadical
+              Medical
               </p>
             </Link>
           </Col>

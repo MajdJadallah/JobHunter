@@ -1,6 +1,7 @@
 import React from 'react';
 import Header from '../components/Header';
-import JobSearch from '../components/JobSearch';
+// import JobSearch from '../components/JobSearch';
+import TestSearch from '../components/TestSearch';
 import jobSeeker from '../images/find job.png'
 import Footer from '../components/Footer';
 
@@ -18,7 +19,7 @@ const Findjob = () => {
       </div>
       <div className='content'>
         <div className="row m-0 g-5">
-          <JobSearch/>
+          <TestSearch/>
         </div>
         
 
