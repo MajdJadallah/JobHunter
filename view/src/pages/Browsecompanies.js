@@ -112,7 +112,7 @@ const Browsecompanies = () => {
                 <h1 id="title-of-card">All Companies</h1>
                 <input
                   type="text"
-                  placeholder="Search for a Job"
+                  placeholder="Search for a Company"
                   onChange={handleSearch}
                   value={search}
                   id="inputField"
