@@ -38,8 +38,8 @@ function JobSearch() {
   });
 
   useEffect(() => {
-    // Fetch data from the API endpoint in your backend
-    const jobs=axios
+    // Fetch data from the API endpoint in  backend
+  axios
       .get('http://localhost:8080/jobs/getjobs')
       .then((response) => {
         setJobs(response.data);
