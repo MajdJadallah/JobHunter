@@ -39,7 +39,7 @@ app.use("/jobs", jobsRouter);
 
 //database and server connections
 mongoose
-  .connect("mongodb+srv://mohammadaldoer:Fev78fpQovovxBQ6@cluster0.ojpsgxa.mongodb.net/loginProject?retryWrites=true&w=majority", {
+  .connect(process.env.MONGO_URL, {
     useNewUrlParser: true,
     useUnifiedTopology: true,
   })
