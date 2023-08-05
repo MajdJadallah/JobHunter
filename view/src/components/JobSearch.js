@@ -30,7 +30,7 @@ function JobSearch() {
     Technology: false,
     Engineering: false,
     Business: false,
-    Meadical: false,
+    Medical: false,
     Sales: false,
     Marketing: false,
     Accounting: false,
@@ -57,7 +57,7 @@ function JobSearch() {
   // }, []);
   useEffect(() => {
     // Fetch data from the API endpoint in your backend
-    axios
+    const jobs=axios
       .get('http://localhost:8080/jobs/getjobs')
       .then((response) => {
         setJobs(response.data);
@@ -245,15 +245,15 @@ function JobSearch() {
           </div>
 
           <div className="form-check">
-            <label className="form-check-label" htmlFor="meadical">
+            <label className="form-check-label" htmlFor="Medical">
               <input
                 className="form-check-input"
                 type="checkbox"
-                value="Meadical"
-                id="meadical"
+                value="Medical"
+                id="Medical"
                 onChange={handleCheckboxValue}
               />
-              Meadical
+              Medical
             </label>
           </div>
 
