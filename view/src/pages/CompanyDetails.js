@@ -25,6 +25,7 @@ const CompanyDetails = () => {
       .then((response) => {
         setCompany(response.data);
         name = response.data.name.toLowerCase();
+        console.log(name)
       })
       .catch((error) => {
         console.error("AxiosError:", error);
@@ -33,13 +34,13 @@ const CompanyDetails = () => {
     axios
       .get(`http://localhost:8080/jobs/getjobs`)
       .then((response) => {
-        setJobs(response.data.filter((job) => job.companyName === name));
+        setJobs(response.data.filter((job) => job.companyName == name));
       })
       .catch((error) => {
         console.error("AxiosError:", error);
       });
   }, []);
-  
+
   console.log(jobs);
   return (
     <div>
