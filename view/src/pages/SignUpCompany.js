@@ -3,7 +3,11 @@ import React from "react";
 import Header from "../components/SignHeader";
 import "./SignUpCompany.css";
 import Footer from "../components/Footer";
+import { Link, useNavigate } from "react-router-dom";
+
 const SignUpCompany = () => {
+  const navigate = useNavigate();
+
   const [name, setName] = React.useState("");
   const [password, setPassword] = React.useState("");
   const [email, setEmail] = React.useState("");
@@ -75,12 +79,13 @@ const SignUpCompany = () => {
         contactFacebook: contactFacebook,
         contactTwitter: contactTwitter,
         password: "1234Am@@am",
-        email: "mohammad@gmail.com",
+        email: "mohammadd@gmail.com",
       });
       console.log(response);
     } catch (error) {
       console.error(error);
     }
+    navigate("/dashboard");
   }
   const handleChangeImage = (event) => {
     const selectedFile = event.target.files[0];
