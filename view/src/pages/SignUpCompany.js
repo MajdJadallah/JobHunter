@@ -63,10 +63,11 @@ const SignUpCompany = () => {
   async function handleSubmit(e) {
     e.preventDefault();
     try {
-      const response = await axios.post("http://localhost:8000/users/signup", {
+      const response = await axios.post("http://localhost:8080/companies/signup", {
         name: name,
-        password: password,
-        email: email,
+        password: "1234Am@@am",
+        email: "mohammad@gmail.com",
+   
         industry: industry,
         country: country,
         type: type,

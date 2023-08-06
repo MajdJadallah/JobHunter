@@ -11,9 +11,9 @@ export function useSignUpContext() {
 // The provider component to wrap around the application
 export function SignUpProvider({ children }) {
   const [userData, setUserData] = useState({
-    name: "",
-    email: "",
-    password: "",
+    name: "mohammad",
+    email: "mohammad@gmail.com",
+    password: "1234Am@@am",
     isJobseeker: false,
     isCompany: false,
   });
