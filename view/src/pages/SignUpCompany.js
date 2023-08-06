@@ -64,10 +64,7 @@ const SignUpCompany = () => {
     e.preventDefault();
     try {
       const response = await axios.post("http://localhost:8080/companies/signup", {
-        name: name,
-        password: "1234Am@@am",
-        email: "mohammad@gmail.com",
-   
+        name: name,   
         industry: industry,
         country: country,
         type: type,
@@ -77,6 +74,8 @@ const SignUpCompany = () => {
         contactInstagram: contactInstagram,
         contactFacebook: contactFacebook,
         contactTwitter: contactTwitter,
+        password: "1234Am@@am",
+        email: "mohammad@gmail.com",
       });
       console.log(response);
     } catch (error) {
