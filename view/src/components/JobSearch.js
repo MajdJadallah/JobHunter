@@ -313,12 +313,13 @@ function JobSearch() {
         {error && <p>{error}</p>}
         <Row>
           {slicedArr.map((job) => (
-            <Col key={job.id} md={6} className="h-100">
+            <Col key={job._id} md={6} className="h-100">
               <Card id="card">
                 <Card.Body>
                   <Card.Title id="title-job">{job.title}</Card.Title>
+                  <Card.Text>{job.companyName}</Card.Text>
                   <Card.Text>{job.desc}</Card.Text>
-                  <Link to={`/jobdetails/${job.id}`} id="more">
+                  <Link to={`/jobdetails/${job._id}`} id="more">
                     Details
                   </Link>
                 </Card.Body>

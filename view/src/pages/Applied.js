@@ -4,6 +4,9 @@ import Footer from "../components/Footer";
 import { useNavigate, useParams ,Link } from "react-router-dom";
 import man from "../images/man.png";
 import axios from "axios";
+
+
+
 function Applied() {
   const [firstname, setFirstname] = useState("");
   const [lastname, setLastname] = useState("");
@@ -23,16 +26,16 @@ function Applied() {
   const navigate = useNavigate();
   const [currentDate, setCurrentDate] = useState("");
   const { companyid, typeOfEmployment, title, name } = useParams();
-
-  useEffect(() => {
-    const today = new Date();
-    const formattedDate = today.toLocaleDateString("en-US", {
-      year: "numeric",
-      month: "2-digit",
-      day: "2-digit",
-    });
-    setCurrentDate(formattedDate);
-  }, []);
+  console.log(name.replace( /\s/g, ''))
+  // useEffect(() => {
+  //   const today = new Date();
+  //   const formattedDate = today.toLocaleDateString("en-US", {
+  //     year: "numeric",
+  //     month: "2-digit",
+  //     day: "2-digit",
+  //   });
+  //   setCurrentDate(formattedDate);
+  // }, []);
 //--------------------Post data of apply job--------------------------
   const handleSubmit = (e) => {
     e.preventDefault();
@@ -49,9 +52,8 @@ function Applied() {
         joblevel,
         experience,
         qualification,
-        cv,
         major,
-        companyName:name,
+        companyName:name.replace( /\s/g, ''),
       })
       .then((response) => {
         console.log(response.data);
@@ -63,6 +65,7 @@ function Applied() {
         console.log(`Error fetching data apply: ${error}`);
         console.log("Error response:", error.response);
       });
+      // navigate("")
 
   };
 
@@ -128,11 +131,11 @@ function Applied() {
 
             <div className="col-md-6 input-box">
               <label>Company Name</label>
-              <input type="text" required value={name} disabled />
+              <input type="text" required value={name.replace( /\s/g, '')} disabled />
             </div>
             <div className="col-md-6 input-box">
               <label>Job Title</label>
-              <input type="text"required value={title} disabled />
+              <input type="text"required value={title.replace( /\s/g, '')} disabled />
             </div>
             <div className="col-md-6 input-box">
               <label>Job Role</label>
@@ -168,18 +171,6 @@ function Applied() {
                 type="text"
                 required
                 onChange={(e) => setQualification(e.target.value)}
-              />
-            </div>
-            <div className="col-md-6 input-box">
-              <label>Time of Apply</label>
-              <input type="text" required value={currentDate} disabled />
-            </div>
-            <div className="col-md-6 input-box">
-              <label>Cv</label>
-              <input
-                type="file"
-                required
-                onChange={(e) => setCv(e.target.value)}
               />
             </div>
           </div>

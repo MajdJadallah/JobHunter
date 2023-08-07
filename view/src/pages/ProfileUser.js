@@ -5,7 +5,9 @@ import Footer from "../components/Footer";
 import "../App.css";
 import Header from "../components/Header";
 import { useState } from "react";
+import { useNavigate } from "react-router-dom";
 const ProfileUser = () => {
+  const navigate = useNavigate();
   const [name, setName] = React.useState("");
   const [avatar, setAvatar] = React.useState("");
   const [password, setPassword] = React.useState("");
@@ -129,6 +131,7 @@ const ProfileUser = () => {
     // You can access the form data using the state variables
     // Example:
     console.log(response);
+      navigate('/signin')
   };
   return (
     <>
@@ -206,12 +209,12 @@ const ProfileUser = () => {
             <div class="input   ">
               <label htmlFor="avatar">Picture:</label>
               <input
-                type="file"
+                type="text"
                 className="input-field"
                 id="avatar"
                 name="avatar"
                 value={avatar}
-                onChange={handleChangeImage}
+                onChange={handleChange}
               />
             </div>
             {/* <div class='input   '>

@@ -158,7 +158,7 @@ const DashboardHome = () => {
             <div className="card flex-fill">
               <div
                 className="card-header"
-                style={{ backgroundColor: "#198754", color: "#fff" }}
+                style={{ backgroundColor: "#000", color: "#fff" }}
               >
                 <h5
                   className="card-title mb-0"
@@ -253,7 +253,7 @@ const DashboardHome = () => {
             <div className="card flex-fill">
               <div
                 className="card-header"
-                style={{ backgroundColor: "#FFFFA9", color: "#000" }}
+                style={{ backgroundColor: "#000", color: "#fff" }}
               >
                 <h5
                   className="card-title mb-0"

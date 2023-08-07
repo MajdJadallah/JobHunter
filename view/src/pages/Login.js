@@ -8,6 +8,7 @@ import Cookies from "universal-cookie";
 const Login = () => {
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
+  const [error, setError] = useState([])
   const navigate = useNavigate();
 
   function handleEmail(e) {
@@ -63,7 +64,6 @@ const Login = () => {
       console.log(error);
     }
   }
-
   return (
     <>
       <Header />
@@ -101,10 +101,12 @@ const Login = () => {
                     className="form-control form-control-lg"
                     placeholder="Enter password"
                   />
+                  <p>{error}</p>
                 </div>
                 <div className="d-flex justify-content-between align-items-center">
                   <div className="form-check mb-0">
                     <input
+                    placeholder=""
                       className="form-check-input me-2"
                       type="checkbox"
                       value=""

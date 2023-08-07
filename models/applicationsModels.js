@@ -17,6 +17,7 @@ const applicationSchema = mongoose.Schema(
     firstname: {
       type: String,
       required: true,
+      unique: false,
     },
     lastname: {
       type: String,
@@ -65,7 +66,7 @@ const applicationSchema = mongoose.Schema(
     },
     cv: {
       type: String,
-      required: true,
+      default:""
     },
     isDeleted: {
       type: Boolean,

@@ -61,4 +61,20 @@ const softDeletejob = async (req, res) => {
   }
 };
 
-module.exports = { postJob, getAllJobs,softDeletejob,getCategories };
+const getJob = async (req, res) => {
+  try {
+    const jobId = req.params.id;
+    const job = await jobSchema.findById(jobId);
+
+    if (!job) {
+      return res.status(404).json({ message: 'User not found' });
+    }
+
+    res.json(job);
+  } catch (error) {
+    console.error('Error finding job:', error);
+    res.status(500).json({ message: 'Internal server error' });
+  }
+};
+
+module.exports = { postJob, getAllJobs,softDeletejob,getCategories,getJob };
